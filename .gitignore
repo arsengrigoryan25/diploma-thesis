@@ -1,0 +1,7 @@
+/target
+/ignore
+.idea
+
+*.iml
+*.zip
+*.png
