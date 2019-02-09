@@ -8,99 +8,118 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "products")
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "id")
 	private int id;
 
-	@Column(name = "active")
-	private int active;
-
-	@Column(name = "status")
-	private int status;
-
-	@Column(name = "user_name")
-	@Length(min = 5, message = "*Your user name must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your user name")
-	@Transient
-	private String userName;
-
-	@Column(name = "password")
-	@Length(min = 5, message = "*Your password must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your password")
-	@Transient
-	private String password;
-
 	@Column(name = "name")
-	@NotEmpty(message = "*Please provide your name")
 	private String name;
 
-	@Column(name = "last_name")
-	@NotEmpty(message = "*Please provide your last name")
-	private String lastName;
+	@Column(name = "description")
+	private String description;
 
+	@Column(name = "count_in_warehouse")
+	private String countInWarehouse;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	@Column(name = "purchase_price")
+	private String purchasePrice;
 
+	@Column(name = "sale_price")
+	private String salePrice;
+
+	@Column(name = "expiration_date")
+	private String expirationDate;
+
+	@Column(name = "product_code")
+	private String productCode;
+
+	@Column(name = "barcode")
+	private String barcode;
+
+	public Product(String name, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
+		this.name = name;
+		this.description = description;
+		this.countInWarehouse = countInWarehouse;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		this.expirationDate = expirationDate;
+		this.productCode = productCode;
+		this.barcode = barcode;
+	}
 
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String getDescription() {
+		return description;
 	}
 
-	public int getActive() {
-		return active;
-	}
-	public void setActive(int active) {
-		this.active = active;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public String getCountInWarehouse() {
+		return countInWarehouse;
 	}
 
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
+	public void setCountInWarehouse(String countInWarehouse) {
+		this.countInWarehouse = countInWarehouse;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getPurchasePrice() {
+		return purchasePrice;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setPurchasePrice(String purchasePrice) {
+		this.purchasePrice = purchasePrice;
+	}
+
+	public String getSalePrice() {
+		return salePrice;
+	}
+
+	public void setSalePrice(String salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public String getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+
+	public String getBarcode() {
+		return barcode;
+	}
+
+	public void setBarcode(String barcode) {
+		this.barcode = barcode;
 	}
 }

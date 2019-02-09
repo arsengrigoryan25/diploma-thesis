@@ -1,39 +1,32 @@
-package com.shop.domain.entity;
+package com.warehouse.domain.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.FilterJoinTable;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
 
+import javax.persistence.*;
+import java.util.Set;
+
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "id")
 	private int id;
 
-	@Column(name = "email")
-	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
-	private String email;
+	@Column(name = "active")
+	private int active;
+
+	@Column(name = "status")
+	private int status;
+
+	@Column(name = "username")
+	@Length(min = 5, message = "*Your user name must have at least 5 characters")
+	@NotEmpty(message = "*Please provide your user name")
+	@Transient
+	private String username;
 
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
@@ -49,20 +42,16 @@ public class User {
 	@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
 
-	@Length(min=9,max=9,message = "*Your phone number must have  9 characters")
-	@Column(name = "phone_number")
-	@NotEmpty(message = "*Please provide your phone_number")
-	private String phoneNumber;
-
-	@Column(name = "image_url")
-	private String imageUrl;
-
-	@Column(name = "active")
-	private int active;
-
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	public int getId() {
 		return id;
@@ -92,13 +81,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public int getActive() {
 		return active;
 	}
@@ -106,24 +88,17 @@ public class User {
 		this.active = active;
 	}
 
-	public Set<Role> getRoles() {
-		return roles;
+	public int getStatus() {
+		return status;
 	}
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getUserName() {
+		return username;
 	}
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setUserName(String userName) {
+		this.username = username;
 	}
 }

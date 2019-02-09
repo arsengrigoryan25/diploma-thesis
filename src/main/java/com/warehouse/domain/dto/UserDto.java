@@ -1,4 +1,4 @@
-package com.shop.domain.dto;
+package com.warehouse.domain.dto;
 
 public class UserDto {
     private int id;

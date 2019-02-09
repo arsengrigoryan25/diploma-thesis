@@ -1,4 +1,4 @@
-package com.shop.domain.dto;
+package com.warehouse.domain.dto;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;

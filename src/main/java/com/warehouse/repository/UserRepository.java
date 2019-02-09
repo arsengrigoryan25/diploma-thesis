@@ -1,6 +1,7 @@
 package com.warehouse.repository;
 
-import com.shop.domain.entity.User;
+
+import com.warehouse.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

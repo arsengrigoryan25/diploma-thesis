@@ -1,4 +1,4 @@
-package com.shop.domain.entity;
+package com.warehouse.domain.entity;
 
 import javax.persistence.*;
 
@@ -16,7 +16,6 @@ public class UserRole {
     public int getUserId() {
         return userId;
     }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -24,7 +23,6 @@ public class UserRole {
     public int getRoleId() {
         return roleId;
     }
-
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
