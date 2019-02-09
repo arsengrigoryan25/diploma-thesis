@@ -13,47 +13,76 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
--- Database: `shop`
+-- Database: `warehouse`
 --
-
 DROP DATABASE IF EXISTS warehouse;
 CREATE DATABASE warehouse;
 USE warehouse;
+
 -- --------------------------------------------------------
-
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
-
-CREATE TABLE `user`
+CREATE TABLE `users`
 (
   `id`        int(11)      NOT NULL,
-  `active`    varchar(255) NOT NULL,
-  `status`    varchar(255) NOT NULL,
+  `active`    varchar(10)  NOT NULL,
+  `status`    varchar(10)  NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `name`      varchar(255) NOT NULL,
-  `code`      varchar(255) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
+  `username`  varchar(255) NOT NULL,
   `password`  varchar(255) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
-
-INSERT INTO `user` (`id`, `active`, `status`, `last_name`, `name`, `user_name`, `password`)
-VALUES (1, '1', '1', 'arsen', 'grigoryan','12345' 'ars', 'ars'),
-       (2, '1', '0', 'arman', 'grigoryan','67890' 'arm', 'arm');
-
+INSERT INTO `users` (`id`, `active`, `status`, `last_name`, `name`, `username`, `password`)
+VALUES (1, '1', '1', 'arsen', 'grigoryan', 'ars', 'ars'),
+       (2, '1', '0', 'arman', 'grigoryan', 'arm', 'arm');
 
 -- ----------------------------------------------------------------------------------------------------------------
+--
+-- Table structure for table `role`
+--
+CREATE TABLE `role`
+(
+  `id`   int(11) NOT NULL,
+  `role` varchar(255) DEFAULT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+--
+-- Dumping data for table `role`
+--
+INSERT INTO `role` (`id`, `role`)
+VALUES (1, 'ADMIN'),
+       (2, 'USER');
 
+-- -------------------------------------------------------------------------------------------------------------
+--
+-- Table structure for table `user_role`
+--
+CREATE TABLE `user_role`
+(
+  `id`      int     NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+--
+-- Dumping data for table `user_role`
+--
+INSERT INTO `user_role` (`user_id`, `role_id`)
+VALUES (1, 1),
+       (2, 2);
+
+-- ----------------------------------------------------------------------------------------------------------------
 --
 -- Table structure for table `products`
 --
-
 CREATE TABLE `products`
 (
   `id`                 int(8) UNSIGNED NOT NULL,
@@ -68,11 +97,9 @@ CREATE TABLE `products`
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-
 --
 -- Dumping data for table `products`
 --
-
 INSERT INTO `products` (`id`, `name`, `description`, `count_in_warehouse`, `purchase_price`, `sale_price`, `expiration_date`, `product_code`,
                         `barcode`)
 VALUES (1, 'lucki', 'haykakan lucki', '1', '100', '110', '2018-02-02', '12345678', '87654321'),
