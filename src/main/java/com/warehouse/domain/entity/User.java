@@ -1,9 +1,5 @@
 package com.warehouse.domain.entity;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,51 +9,34 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private int id;
-
-	@Column(name = "active")
-	private int active;
-
-	@Column(name = "status")
-	private int status;
-
-	@Column(name = "username")
-	@Length(min = 5, message = "*Your user name must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your user name")
-	@Transient
+	private Long id;
 	private String username;
-
-	@Column(name = "password")
-	@Length(min = 5, message = "*Your password must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your password")
-	@Transient
 	private String password;
+	private boolean active;
 
-	@Column(name = "name")
-	@NotEmpty(message = "*Please provide your name")
+	private int status;
 	private String name;
-
-	@Column(name = "last_name")
-	@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
+	public User(String username, String password, boolean active, int status, String name, String lastName, Set<Role> roles) {
+		this.username = username;
+		this.password = password;
+		this.active = active;
+		this.status = status;
+		this.name = name;
+		this.lastName = lastName;
+		this.roles = roles;
+	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getPassword() {
@@ -81,10 +60,24 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public int getActive() {
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public boolean isActive() {
 		return active;
 	}
-	public void setActive(int active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 

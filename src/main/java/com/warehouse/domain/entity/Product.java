@@ -54,7 +54,6 @@ public class Product {
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -62,7 +61,6 @@ public class Product {
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -70,7 +68,6 @@ public class Product {
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -78,7 +75,6 @@ public class Product {
 	public String getCountInWarehouse() {
 		return countInWarehouse;
 	}
-
 	public void setCountInWarehouse(String countInWarehouse) {
 		this.countInWarehouse = countInWarehouse;
 	}
@@ -86,7 +82,6 @@ public class Product {
 	public String getPurchasePrice() {
 		return purchasePrice;
 	}
-
 	public void setPurchasePrice(String purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
@@ -94,7 +89,6 @@ public class Product {
 	public String getSalePrice() {
 		return salePrice;
 	}
-
 	public void setSalePrice(String salePrice) {
 		this.salePrice = salePrice;
 	}
@@ -102,7 +96,6 @@ public class Product {
 	public String getExpirationDate() {
 		return expirationDate;
 	}
-
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
@@ -110,7 +103,6 @@ public class Product {
 	public String getProductCode() {
 		return productCode;
 	}
-
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
@@ -118,7 +110,6 @@ public class Product {
 	public String getBarcode() {
 		return barcode;
 	}
-
 	public void setBarcode(String barcode) {
 		this.barcode = barcode;
 	}

@@ -1,18 +1,11 @@
 package com.warehouse.controller;
 
 import com.warehouse.domain.entity.Product;
-import com.warehouse.domain.entity.User;
 import com.warehouse.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -20,6 +13,11 @@ public class AddProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @GetMapping("/")
+    public String greeting(Map<String, Object> model) {
+        return "main";
+    }
 
     @GetMapping("/addProduct")
     public String main() {

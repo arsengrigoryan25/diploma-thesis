@@ -1,27 +1,32 @@
 <html>
-
 <body>
-    <div>
-        <form method="post">
-            <label>Անուն</label>
-            <input type="text" name="name" placeholder="Անուն" /><br/>
-            <label>Նկարագրությունը</label>
-            <input type="text" name="description" placeholder="Նկարագրությունը"><br/>
-            <label>Պահեստում առկա քանակը</label>
-            <input type="text" name="countInWarehouse" placeholder="Պահեստում առկա քանակը" /><br/>
-            <label>Գնման գին</label>
-            <input type="text" name="purchasePrice" placeholder="գնման գին"><br/>
-            <label>Վաճառքի գին</label>
-            <input type="text" name="salePrice" placeholder="Վաճառքի գին" /><br/>
-            <label>Պիտանելության ժամկետ</label>
-            <input type="text" name="expirationDate" placeholder="Պիտանելության ժամկետ"><br/>
-            <label>Ապրանքի կոդը</label>
-            <input type="text" name="productCode" placeholder="Ապրանքի կոդը" /><br/>
-            <label>Շտրիխ կոդ</label>
-            <input type="text" name="barcode" placeholder="Շտրիխ կոդ"><br/>
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-            <button type="submit">Ավելացնել</button>
-        </form>
-    </div>
+<div>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+<div>
+    <form method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <label>Անուն</label>
+        <input type="text" name="name" placeholder="Անուն"/><br/>
+        <label>Նկարագրությունը</label>
+        <input type="text" name="description" placeholder="Նկարագրությունը"><br/>
+        <label>Պահեստում առկա քանակը</label>
+        <input type="text" name="countInWarehouse" placeholder="Պահեստում առկա քանակը"/><br/>
+        <label>Գնման գին</label>
+        <input type="text" name="purchasePrice" placeholder="գնման գին"><br/>
+        <label>Վաճառքի գին</label>
+        <input type="text" name="salePrice" placeholder="Վաճառքի գին"/><br/>
+        <label>Պիտանելության ժամկետ</label>
+        <input type="text" name="expirationDate" placeholder="Պիտանելության ժամկետ"><br/>
+        <label>Ապրանքի կոդը</label>
+        <input type="text" name="productCode" placeholder="Ապրանքի կոդը"/><br/>
+        <label>Շտրիխ կոդ</label>
+        <input type="text" name="barcode" placeholder="Շտրիխ կոդ"><br/>
+        <button type="submit">Ավելացնել</button>
+    </form>
+</div>
 </body>
 </html>

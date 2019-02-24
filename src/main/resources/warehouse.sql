@@ -26,7 +26,7 @@ USE warehouse;
 CREATE TABLE `users`
 (
   `id`        int(11)      NOT NULL,
-  `active`    varchar(10)  NOT NULL,
+  `active`    bool  NOT NULL,
   `status`    varchar(10)  NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `name`      varchar(255) NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE `users`
 -- Dumping data for table `users`
 --
 INSERT INTO `users` (`id`, `active`, `status`, `last_name`, `name`, `username`, `password`)
-VALUES (1, '1', '1', 'arsen', 'grigoryan', 'ars', 'ars'),
-       (2, '1', '0', 'arman', 'grigoryan', 'arm', 'arm');
+VALUES (1, true, '1', 'arsen', 'grigoryan', 'ars', 'ars'),
+       (2, true, '0', 'arman', 'grigoryan', 'arm', 'arm');
 
 -- ----------------------------------------------------------------------------------------------------------------
 --
