@@ -14,7 +14,8 @@ public class User {
 	private String password;
 	private boolean active;
 
-	private int status;
+
+	private String status;
 	private String name;
 	private String lastName;
 
@@ -22,7 +23,7 @@ public class User {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
-	public User(String username, String password, boolean active, int status, String name, String lastName, Set<Role> roles) {
+	public User(String username, String password, boolean active, String status, String name, String lastName, Set<Role> roles) {
 		this.username = username;
 		this.password = password;
 		this.active = active;
@@ -81,10 +82,10 @@ public class User {
 		this.active = active;
 	}
 
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
