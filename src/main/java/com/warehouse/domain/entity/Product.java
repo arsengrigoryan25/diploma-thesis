@@ -15,29 +15,13 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-
-	@Column(name = "name")
 	private String name;
-
-	@Column(name = "description")
 	private String description;
-
-	@Column(name = "count_in_warehouse")
 	private String countInWarehouse;
-
-	@Column(name = "purchase_price")
 	private String purchasePrice;
-
-	@Column(name = "sale_price")
 	private String salePrice;
-
-	@Column(name = "expiration_date")
 	private String expirationDate;
-
-	@Column(name = "product_code")
 	private String productCode;
-
-	@Column(name = "barcode")
 	private String barcode;
 
 	public Product(String name, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {

@@ -26,12 +26,13 @@ USE warehouse;
 CREATE TABLE `users`
 (
   `id`        int(11)      NOT NULL,
-  `active`    bool  NOT NULL,
-  `status`    varchar(10)  NOT NULL,
-  `last_name` varchar(255) NOT NULL,
   `name`      varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `status`    varchar(255) NOT NULL,
+  `active`    bool  NOT NULL,
   `username`  varchar(255) NOT NULL,
   `password`  varchar(255) NOT NULL
+
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

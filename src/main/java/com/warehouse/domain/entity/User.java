@@ -10,17 +10,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String username;
-	private String password;
-	private boolean active;
-
-
-	private String status;
 	private String name;
 	private String lastName;
+	private String status;
+	private boolean active;
+	private String username;
+	private String password;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@ManyToMany(cascade = CascadeType.ALL )
+	@JoinTable(name = "user_role",
+			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> roles;
 
 	public User(String username, String password, boolean active, String status, String name, String lastName, Set<Role> roles) {
