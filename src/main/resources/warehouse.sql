@@ -29,7 +29,7 @@ CREATE TABLE `users`
   `name`      varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `status`    varchar(255) NOT NULL,
-  `active`    bool  NOT NULL,
+  `active`    bool         NOT NULL,
   `username`  varchar(255) NOT NULL,
   `password`  varchar(255) NOT NULL
 
@@ -49,8 +49,8 @@ VALUES (1, true, '1', 'arsen', 'grigoryan', 'ars', 'ars'),
 --
 CREATE TABLE `role`
 (
-  `id`   int(11) NOT NULL,
-  `role` varchar(255) DEFAULT NULL
+  `id`   int(11)      NOT NULL,
+  `role` varchar(255) NOT NULL
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
