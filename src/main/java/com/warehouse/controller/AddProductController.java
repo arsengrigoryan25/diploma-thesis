@@ -26,16 +26,16 @@ public class AddProductController {
 
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam String name,
-                        @RequestParam String description,
-                        @RequestParam String countInWarehouse,
-                        @RequestParam String purchasePrice,
-                        @RequestParam String salePrice,
-                        @RequestParam String expirationDate,
-                        @RequestParam String productCode,
-                        @RequestParam String barcode
-                       ) {
+                             @RequestParam String description,
+                             @RequestParam String countInWarehouse,
+                             @RequestParam String purchasePrice,
+                             @RequestParam String salePrice,
+                             @RequestParam String expirationDate,
+                             @RequestParam String productCode,
+                             @RequestParam String barcode
+    ) {
 
-        Product product = new Product( name, description, countInWarehouse, purchasePrice, salePrice, expirationDate, productCode, barcode);
+        Product product = new Product(name, description, countInWarehouse, purchasePrice, salePrice, expirationDate, productCode, barcode);
         productRepository.save(product);
 
         return "addProduct";
