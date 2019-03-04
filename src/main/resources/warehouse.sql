@@ -3,26 +3,17 @@ INSERT INTO `users` (`id`, `active`, `status`, `last_name`, `name`, `username`, 
 VALUES (1, true, '1', 'arsen', 'grigoryan', 'ars', 'ars'),
        (2, true, '1', 'arman', 'grigoryan', 'arm', 'arm');
 
--- ----------------------------------------------------------------------------------------------------------------
---
 -- Dumping data for table `role`
---
 INSERT INTO `role` (`id`, `role`)
 VALUES (1, 'ADMIN'),
        (2, 'USER');
 
--- -------------------------------------------------------------------------------------------------------------
---
 -- Dumping data for table `user_role`
---
 INSERT INTO `user_role` (`user_id`, `role_id`)
 VALUES (1, 1),
        (2, 2);
 
--- ----------------------------------------------------------------------------------------------------------------
---
 -- Dumping data for table `products`
---
 INSERT INTO `products` (`id`, `name`, `description`, `count_in_warehouse`, `purchase_price`, `sale_price`, `expiration_date`, `product_code`,
                         `barcode`)
 VALUES (1, 'lucki', 'haykakan lucki', '1', '100', '110', '2018-02-02', '12345678', '87654321'),
