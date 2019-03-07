@@ -1,7 +1,7 @@
 package com.warehouse.controller;
 
-import com.warehouse.domain.entity.Product;
-import com.warehouse.repository.ProductRepository;
+import com.warehouse.domain.entity.ProductInWarehouse;
+import com.warehouse.repository.ProductInWarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.util.Map;
 public class AddProductController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductInWarehouseRepository productInWarehouseRepository;
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -35,8 +35,8 @@ public class AddProductController {
                              @RequestParam String barcode
     ) {
 
-        Product product = new Product(name, description, countInWarehouse, purchasePrice, salePrice, expirationDate, productCode, barcode);
-        productRepository.save(product);
+        ProductInWarehouse productInWarehouse = new ProductInWarehouse(name, description, countInWarehouse, purchasePrice, salePrice, expirationDate, productCode, barcode);
+        productInWarehouseRepository.save(productInWarehouse);
 
         return "addProduct";
     }

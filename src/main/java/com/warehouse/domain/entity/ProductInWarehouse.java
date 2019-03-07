@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class ProductInWarehouse {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +24,7 @@ public class Product {
 	private String productCode;
 	private String barcode;
 
-	public Product(String name, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
+	public ProductInWarehouse(String name, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
 		this.name = name;
 		this.description = description;
 		this.countInWarehouse = countInWarehouse;
