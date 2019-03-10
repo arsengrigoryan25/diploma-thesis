@@ -67,7 +67,8 @@ CREATE TABLE `products`
 (
   `id`                 int(8) UNSIGNED NOT NULL,
   `name`               varchar(255)    NOT NULL,
-  `description`        varchar(255)    NOT NULL,
+  `name`               varchar(255)    NOT NULL,
+  `description`        varchar(255),
   `count_in_warehouse` varchar(255)    NOT NULL,
   `purchase_price`     varchar(255)    NOT NULL,
   `sale_price`         varchar(255)    NOT NULL,

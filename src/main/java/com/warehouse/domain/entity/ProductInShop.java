@@ -3,7 +3,7 @@ package com.warehouse.domain.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
+@Table(name = "products_in_shop")
 public class ProductInShop {
 
 	@Id
@@ -11,6 +11,7 @@ public class ProductInShop {
 	@Column(name = "id")
 	private int id;
 	private String name;
+	private String type;
 	private String description;
 	private String countInWarehouse;
 	private String purchasePrice;
@@ -19,8 +20,9 @@ public class ProductInShop {
 	private String productCode;
 	private String barcode;
 
-	public ProductInShop(String name, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
+	public ProductInShop(String name, String type, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
 		this.name = name;
+		this.type = type;
 		this.description = description;
 		this.countInWarehouse = countInWarehouse;
 		this.purchasePrice = purchasePrice;
@@ -42,6 +44,13 @@ public class ProductInShop {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getDescription() {

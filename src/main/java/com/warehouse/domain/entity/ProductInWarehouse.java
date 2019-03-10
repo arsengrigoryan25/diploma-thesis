@@ -1,14 +1,11 @@
 package com.warehouse.domain.entity;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
+import jdk.nashorn.internal.objects.annotations.Getter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "products")
+@Table(name = "products_in_warehouse")
 public class ProductInWarehouse {
 
 	@Id
@@ -16,6 +13,7 @@ public class ProductInWarehouse {
 	@Column(name = "id")
 	private int id;
 	private String name;
+	private String type;
 	private String description;
 	private String countInWarehouse;
 	private String purchasePrice;
@@ -24,18 +22,21 @@ public class ProductInWarehouse {
 	private String productCode;
 	private String barcode;
 
-	public ProductInWarehouse(String name, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
-		this.name = name;
-		this.description = description;
-		this.countInWarehouse = countInWarehouse;
-		this.purchasePrice = purchasePrice;
-		this.salePrice = salePrice;
-		this.expirationDate = expirationDate;
-		this.productCode = productCode;
-		this.barcode = barcode;
+	public ProductInWarehouse() {
 	}
+    public ProductInWarehouse(String name, String type, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.countInWarehouse = countInWarehouse;
+        this.purchasePrice = purchasePrice;
+        this.salePrice = salePrice;
+        this.expirationDate = expirationDate;
+        this.productCode = productCode;
+        this.barcode = barcode;
+    }
 
-	public int getId() {
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -49,7 +50,14 @@ public class ProductInWarehouse {
 		this.name = name;
 	}
 
-	public String getDescription() {
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {

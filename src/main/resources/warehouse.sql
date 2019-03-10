@@ -14,10 +14,10 @@ VALUES (1, 1),
        (2, 2);
 
 -- Dumping data for table `products`
-INSERT INTO `products` (`id`, `name`, `description`, `count_in_warehouse`, `purchase_price`, `sale_price`, `expiration_date`, `product_code`,
+INSERT INTO `products` (`id`,`name`, `type`, `description`, `count_in_warehouse`, `purchase_price`, `sale_price`, `expiration_date`, `product_code`,
                         `barcode`)
-VALUES (1, 'lucki', 'haykakan lucki', '1', '100', '110', '2018-02-02', '12345678', '87654321'),
-       (2, 'grich', 'sev grich', '1', '120', '130', '2018-02-02', '23456789', '98765432');
+VALUES (1,'spichka','lucki', 'haykakan lucki', '1', '100', '110', '2018-02-02', '12345678', '87654321'),
+       (2,'cello','grich', 'sev grich', '1', '120', '130', '2018-02-02', '23456789', '98765432');
 
 -- ----------------------------------------------------------------------------------------------------------------
 

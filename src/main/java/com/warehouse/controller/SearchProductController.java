@@ -1,6 +1,6 @@
 package com.warehouse.controller;
 
-import com.warehouse.domain.entity.ProductInShop;
+import com.warehouse.domain.entity.ProductInWarehouse;
 import com.warehouse.repository.ProductInWarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ProductController {
+public class SearchProductController {
 
     @Autowired
     private ProductInWarehouseRepository productInWarehouseRepository;
@@ -25,10 +25,9 @@ public class ProductController {
                              @RequestParam String productCode,
                              @RequestParam String barcode
     ) {
-
-        ProductInShop productInShop = new ProductInShop();
+        ProductInWarehouse productInShop = new ProductInWarehouse();
         productInWarehouseRepository.save(productInShop);
 
-        return "addProduct";
+        return "product";
     }
 }
