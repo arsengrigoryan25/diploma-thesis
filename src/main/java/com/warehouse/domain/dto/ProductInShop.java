@@ -1,31 +1,25 @@
-package com.warehouse.domain.entity;
+package com.warehouse.domain.dto;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "products_in_shop")
 public class ProductInShop {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private int id;
 	private String name;
 	private String type;
 	private String description;
-	private String countInWarehouse;
-	private String purchasePrice;
+	private String count;
 	private String salePrice;
 	private String expirationDate;
 	private String productCode;
 	private String barcode;
 
-	public ProductInShop(String name, String type, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
+	public ProductInShop() {
+	}
+	public ProductInShop(String name, String type, String description, String count, String salePrice,
+						 String expirationDate, String productCode, String barcode) {
 		this.name = name;
 		this.type = type;
 		this.description = description;
-		this.countInWarehouse = countInWarehouse;
-		this.purchasePrice = purchasePrice;
+		this.count = count;
 		this.salePrice = salePrice;
 		this.expirationDate = expirationDate;
 		this.productCode = productCode;
@@ -37,6 +31,13 @@ public class ProductInShop {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
 	}
 
 	public String getName() {
@@ -58,20 +59,6 @@ public class ProductInShop {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getCountInWarehouse() {
-		return countInWarehouse;
-	}
-	public void setCountInWarehouse(String countInWarehouse) {
-		this.countInWarehouse = countInWarehouse;
-	}
-
-	public String getPurchasePrice() {
-		return purchasePrice;
-	}
-	public void setPurchasePrice(String purchasePrice) {
-		this.purchasePrice = purchasePrice;
 	}
 
 	public String getSalePrice() {

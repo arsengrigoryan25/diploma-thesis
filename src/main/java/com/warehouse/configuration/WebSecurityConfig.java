@@ -34,7 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/addProduct").hasAnyAuthority("USER, ADMIN")
+                .antMatchers("/addProduct/*").hasAnyAuthority("USER, ADMIN")
+//                .antMatchers("/addProduct/shop").hasAnyAuthority("USER, ADMIN")
+//                .antMatchers("/addProduct/warehouse").hasAnyAuthority("USER, ADMIN")
 //                .antMatchers("/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -55,8 +57,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordEncoder(bCryptPasswordEncoder)
 //                .usersByUsernameQuery(usersQuery)
 //                .authoritiesByUsernameQuery(rolesQuery);
-                .usersByUsernameQuery("select username, password, active from users where username=?")
-                .authoritiesByUsernameQuery("select u.username, r.role from users u inner join user_role ur on(u.id = ur.user_id) inner join role r on(ur.role_id=r.id) where u.username=?");
+                .usersByUsernameQuery("SELECT username, password, active " +
+                        "FROM users " +
+                        "WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT u.username, r.role " +
+                        "FROM users u " +
+                        "INNER JOIN user_role ur on(u.id = ur.user_id) " +
+                        "INNER JOIN role r on(ur.role_id=r.id) " +
+                        "WHERE u.username=?");
     }
 
 

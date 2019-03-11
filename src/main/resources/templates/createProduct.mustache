@@ -7,14 +7,16 @@
     </form>
 </div>
 <div>
-    <form action="/addProduct" method="post">
+    <form action="/createProduct" method="post">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <label>Անուն</label>
         <input type="text" name="name" placeholder="Անուն"/><br/>
+        <label>Տեսակ</label>
+        <input type="text" name="type" placeholder="Տեսակ"/><br/>
         <label>Նկարագրությունը</label>
         <input type="text" name="description" placeholder="Նկարագրությունը"><br/>
-        <label>Պահեստում առկա քանակը</label>
-        <input type="text" name="countInWarehouse" placeholder="Պահեստում առկա քանակը"/><br/>
+        <label>Քանակը</label>
+        <input type="text" name="count" placeholder="Քանակը"/><br/>
         <label>Գնման գին</label>
         <input type="text" name="purchasePrice" placeholder="գնման գին"><br/>
         <label>Վաճառքի գին</label>

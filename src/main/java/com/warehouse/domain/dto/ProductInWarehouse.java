@@ -1,16 +1,7 @@
-package com.warehouse.domain.entity;
+package com.warehouse.domain.dto;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name = "products_in_warehouse")
 public class ProductInWarehouse {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private int id;
 	private String name;
 	private String type;
@@ -24,7 +15,8 @@ public class ProductInWarehouse {
 
 	public ProductInWarehouse() {
 	}
-    public ProductInWarehouse(String name, String type, String description, String countInWarehouse, String purchasePrice, String salePrice, String expirationDate, String productCode, String barcode) {
+    public ProductInWarehouse(String name, String type, String description, String countInWarehouse, String purchasePrice,
+							  String salePrice, String expirationDate, String productCode, String barcode) {
         this.name = name;
         this.type = type;
         this.description = description;
