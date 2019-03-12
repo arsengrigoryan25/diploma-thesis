@@ -44,12 +44,12 @@ public class AddProductController {
         return "createProduct";
     }
 
-    @GetMapping("/addProduct/warehouse")
+    @GetMapping("/addProduct")
     public String addProduct() {
         return "addProductInWarehouse";
     }
 
-    @PostMapping("/addProduct/warehouse")
+    @PostMapping("/addProduct")
     public String addProductInWarehouse(@RequestParam String name,
                                         @RequestParam String type,
                                         @RequestParam String description,
@@ -59,7 +59,9 @@ public class AddProductController {
                                         @RequestParam String salePrice,
                                         @RequestParam String expirationDate,
                                         @RequestParam String productCode,
-                                        @RequestParam String barcode
+                                        @RequestParam String barcode,
+                                        @RequestParam String select
+
     ) {
         ProductEntity entity = new ProductEntity(name, type, description, countInWarehouse, countInShop, purchasePrice, salePrice,
                 expirationDate, productCode, barcode);
@@ -79,7 +81,7 @@ public class AddProductController {
     ) {
 
 
-        return "addProductInShop";
+        return "addProduct";
     }
 
 

@@ -7,7 +7,7 @@
     </form>
 </div>
 <div>
-    <form action="/addProduct/shop" method="post">
+    <form action="/addProduct" method="post">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <label>Անուն</label>
         <input type="text" name="name" placeholder="Անուն"/><br/>
@@ -23,6 +23,11 @@
         <input type="text" name="productCode" placeholder="Ապրանքի կոդը"/><br/>
         <label>Շտրիխ կոդ</label>
         <input type="text" name="barcode" placeholder="Շտրիխ կոդ"><br/>
+        <label for="sel1">Ապրանք ավոլացնել</label>
+        <select class="form-control " id="sel1" name="select">
+            <option value="warehouse">Պահեստ</option>
+            <option value="shop">Խանութ</option>
+        </select>
         <button type="submit">Ավելացնել</button>
     </form>
 </div>

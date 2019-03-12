@@ -1,7 +1,6 @@
 package com.warehouse.controller;
 
 import com.warehouse.repository.ProductInWarehouseRepository;
-import jdk.nashorn.internal.objects.annotations.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,7 @@ public class SearchProductController {
 
     @GetMapping("/Product")
     public String main() {
-        return "addProductInShop";
+        return "addProduct";
     }
 
     @PostMapping("/Product")
@@ -26,6 +25,6 @@ public class SearchProductController {
                              @RequestParam String barcode
     ) {
 
-        return "addProductInShop";
+        return "addProduct";
     }
 }
