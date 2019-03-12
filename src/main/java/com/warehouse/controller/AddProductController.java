@@ -1,14 +1,11 @@
 package com.warehouse.controller;
 
 import com.warehouse.domain.entity.ProductEntity;
-import com.warehouse.domain.entity.ProductInWarehouseEntity;
 import com.warehouse.repository.ProductRepository;
-import com.warehouse.repository.ProductInWarehouseRepository;
 import com.warehouse.service.AddProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 @Controller
@@ -18,16 +15,6 @@ public class AddProductController {
     private ProductRepository productRepository;
     @Autowired
     private AddProductService addProductService;
-
-//    private final ProductInWarehouseRepository productInWarehouseRepository;
-//    private final ProductInShopRepository productInShopRepository;
-//    private final AddProductService addProductService;
-//
-//    public AddProductController(ProductInWarehouseRepository productInWarehouseRepository, ProductInShopRepository productInShopRepository, AddProductService addProductService) {
-//        this.productInWarehouseRepository = productInWarehouseRepository;
-//        this.productInShopRepository = productInShopRepository;
-//        this.addProductService = addProductService;
-//    }
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -57,12 +44,12 @@ public class AddProductController {
         return "createProduct";
     }
 
-    @GetMapping("/updateProduct/warehouse")
-    public String main() {
-        return "updateProductInWarehouse";
+    @GetMapping("/addProduct/warehouse")
+    public String addProduct() {
+        return "addProductInWarehouse";
     }
 
-    @PostMapping("/updateProduct/warehouse")
+    @PostMapping("/addProduct/warehouse")
     public String addProductInWarehouse(@RequestParam String name,
                                         @RequestParam String type,
                                         @RequestParam String description,
@@ -78,12 +65,7 @@ public class AddProductController {
                 expirationDate, productCode, barcode);
         productRepository.save(entity);
 
-        return "updateProductInWarehouse";
-    }
-
-    @GetMapping("/addProduct/shop")
-    public String main1() {
-        return "addProductInShop";
+        return "addProductInWarehouse";
     }
 
     @PostMapping("/addProduct/shop")
@@ -101,28 +83,27 @@ public class AddProductController {
     }
 
 
-
-    @GetMapping("/editProduct")
-    public String edit() {
-        return "editProduct";
-    }
-
-    @PostMapping("/editProduct")
-    public String editProduct(@RequestParam String name,
-                              @RequestParam String type,
-                              @RequestParam String description,
-                              @RequestParam String countInWarehouse,
-                              @RequestParam String countInShop,
-                              @RequestParam String purchasePrice,
-                              @RequestParam String salePrice,
-                              @RequestParam String expirationDate,
-                              @RequestParam String productCode,
-                              @RequestParam String barcode
-    ) {
-        ProductEntity entity = new ProductEntity(name, type, description, countInWarehouse, countInShop, purchasePrice, salePrice,
-                expirationDate, productCode, barcode);
-        productRepository.exists(entity);
-
-        return "editProduct";
-    }
+//    @GetMapping("/editProduct")
+//    public String edit() {
+//        return "editProduct";
+//    }
+//
+//    @PostMapping("/editProduct")
+//    public String editProduct(@RequestParam String name,
+//                              @RequestParam String type,
+//                              @RequestParam String description,
+//                              @RequestParam String countInWarehouse,
+//                              @RequestParam String countInShop,
+//                              @RequestParam String purchasePrice,
+//                              @RequestParam String salePrice,
+//                              @RequestParam String expirationDate,
+//                              @RequestParam String productCode,
+//                              @RequestParam String barcode
+//    ) {
+//        ProductEntity entity = new ProductEntity(name, type, description, countInWarehouse, countInShop, purchasePrice, salePrice,
+//                expirationDate, productCode, barcode);
+//        productRepository.exists(entity);
+//
+//        return "editProduct";
+//    }
 }
