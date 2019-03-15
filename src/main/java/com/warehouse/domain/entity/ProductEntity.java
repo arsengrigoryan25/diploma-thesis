@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @NoArgsConstructor
@@ -22,23 +21,26 @@ public class ProductEntity {
 	private String name;
 	private String type;
 	private String description;
-	private String countInWarehouse;
-	private String countInShop;
+	private Integer countInWarehouse;
+	private Integer countInShop;
 	private String purchasePrice;
 	private String salePrice;
 	private String expirationDate;
+	@Column(unique = true)
 	private String productCode;
-	private String barcode;
+	@Column(unique = true)
+	private String barCode;
 
-    public ProductEntity(String name,
-						 String type,
-						 String description,
-						 String countInWarehouse,
-						 String countInShop,
-						 String purchasePrice,
-						 String salePrice,
-						 String expirationDate,
-						 String productCode,
-						 String barcode) {
-    }
+	public ProductEntity(String name, String type, String description, Integer countInWarehouse, Integer countInShop, String purchasePrice, String salePrice, String expirationDate, String productCode, String barCode) {
+		this.name = name;
+		this.type = type;
+		this.description = description;
+		this.countInWarehouse = countInWarehouse;
+		this.countInShop = countInShop;
+		this.purchasePrice = purchasePrice;
+		this.salePrice = salePrice;
+		this.expirationDate = expirationDate;
+		this.productCode = productCode;
+		this.barCode = barCode;
+	}
 }

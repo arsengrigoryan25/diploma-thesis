@@ -1,32 +1,26 @@
 <html>
 <body>
 <div>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <input type="submit" value="Sign Out"/>
-    </form>
-</div>
-<div>
-    <form action="/createProduct" method="post">
+    <form action="/createProduct" method="get" >
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <label>Անուն</label>
-        <input type="text" name="name" placeholder="Անուն"/><br/>
+        <input type="text" name="name"/><br/>
         <label>Տեսակ</label>
-        <input type="text" name="type" placeholder="Տեսակ"/><br/>
+        <input type="text" name="type"/><br/>
         <label>Նկարագրությունը</label>
-        <input type="text" name="description" placeholder="Նկարագրությունը"><br/>
+        <input type="text" name="description"><br/>
         <label>Քանակը</label>
-        <input type="text" name="count" placeholder="Քանակը"/><br/>
+        <input type="text" name="countInWarehouse"/><br/>
         <label>Գնման գին</label>
-        <input type="text" name="purchasePrice" placeholder="գնման գին"><br/>
+        <input type="text" name="purchasePrice"><br/>
         <label>Վաճառքի գին</label>
-        <input type="text" name="salePrice" placeholder="Վաճառքի գին"/><br/>
+        <input type="text" name="salePrice"/><br/>
         <label>Պիտանելության ժամկետ</label>
-        <input type="text" name="expirationDate" placeholder="Պիտանելության ժամկետ"><br/>
+        <input type="text" name="expirationDate"><br/>
         <label>Ապրանքի կոդը</label>
-        <input type="text" name="productCode" placeholder="Ապրանքի կոդը"/><br/>
+        <input type="text" name="productCode"/><br/>
         <label>Շտրիխ կոդ</label>
-        <input type="text" name="barcode" placeholder="Շտրիխ կոդ"><br/>
+        <input type="text" name="barcode"><br/>
         <button type="submit">Ավելացնել</button>
     </form>
 </div>

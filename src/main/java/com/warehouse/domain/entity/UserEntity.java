@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,13 +23,15 @@ public class User {
     private String lastName;
     private String status;
     private boolean active;
+    @Column(unique = true)
     private String username;
+    @Column(unique = true)
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles;
+    private Set<RoleEntity> roleEntities;
 
 }
