@@ -23,7 +23,7 @@ VALUES (1, 'spichka', 'lucki', 'haykakan lucki', 10, 5, '100', '110', '2018-02-0
 
 
 UPDATE products
-SET count_in_warehouse = count_in_warehouse + '10' ,
+SET count_in_warehouse = count_in_warehouse + '10',
     count_in_shop = count_in_shop + '10'
 WHERE bar_code = '87654321';
 commit ;

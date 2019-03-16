@@ -3,13 +3,13 @@ package com.warehouse.controller;
 import com.warehouse.domain.dto.Product;
 import com.warehouse.domain.entity.ProductEntity;
 import com.warehouse.repository.ProductRepository;
-
 import com.warehouse.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -54,44 +54,52 @@ public class ProductController {
 
     @GetMapping("/addPage")
     public String addProduct() {
-        productRepository.findAll();
+        List<ProductEntity> productEntity = productRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("addProduct");
-        modelAndView.addObject("nameProduct", );
-        modelAndView.addObject("productCodeProduct", );
-        modelAndView.addObject("barcodeProduct", );
+        modelAndView.addObject("product", productEntity);
         return "addProduct";
     }
 
-    @PostMapping("/addProduct")
-    public String addProductInWarehouse(@RequestParam String countInWarehouse,
-                                        @RequestParam String countInShop,
+    @GetMapping("/addProductInWarehouse")
+    public String addProductInWarehouse(@RequestParam String count,
                                         @RequestParam String productCode,
                                         @RequestParam String barcode
     ) {
-        Product product = new Product(new Integer(countInWarehouse), new Integer(countInShop), productCode, barcode);
-        productService.updateProducts(product);
+        Product product = new Product(new Integer(count), productCode, barcode);
+        productService.updateProductsInWarehouse(product);
+        return "addProductInWarehouse";
+    }
 
-        return "addProduct";
+    @GetMapping("/addProductInShop")
+    public String addProductInShop(@RequestParam String count,
+                                   @RequestParam String productCode,
+                                   @RequestParam String barcode
+    ) {
+        Product product = new Product(new Integer(count), productCode, barcode);
+        productService.updateProductsInShop(product);
+        return "addProductInShop";
     }
 
     @GetMapping("/searchPage")
-    public String main() {
+    public String search() {
         return "searchProduct";
     }
 
     @GetMapping("/searchProduct")
-    public String addProduct(@RequestParam String name,
-                             @RequestParam String count,
-                             @RequestParam String productCode,
-                             @RequestParam String barcode
+    public String searchProduct(@RequestParam String name,
+                                @RequestParam String type,
+                                @RequestParam String expirationDate,
+                                @RequestParam String productCode,
+                                @RequestParam String barcode
     ) {
-
-        return "addProduct";
+        List<ProductEntity> productEntity = productRepository.
+        ModelAndView modelAndView = new ModelAndView("searchProduct");
+        modelAndView.addObject("product", productEntity);
+        return "searchProduct";
     }
 }
 
 
-//
 //    @PostMapping("/addProduct/shop")
 //    public String addProductInShop(@RequestParam String name,
 //                                   @RequestParam String type,
@@ -105,7 +113,7 @@ public class ProductController {
 //
 //        return "addProduct";
 //    }
-//
+
 
 //    @GetMapping("/editProduct")
 //    public String edit() {

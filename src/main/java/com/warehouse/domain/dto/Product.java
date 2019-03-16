@@ -19,17 +19,15 @@ public class Product implements Serializable {
 	private String name;
 	private String type;
 	private String description;
-	private Integer countInWarehouse;
-	private Integer countInShop;
+	private Integer count;
 	private String purchasePrice;
 	private String salePrice;
 	private String expirationDate;
 	private String productCode;
 	private String barCode;
 
-	public Product(Integer countInWarehouse, Integer countInShop, String productCode, String barCode) {
-		this.countInWarehouse = countInWarehouse;
-		this.countInShop = countInShop;
+	public Product(Integer count, String productCode, String barCode) {
+		this.count = count;
 		this.productCode = productCode;
 		this.barCode = barCode;
 	}
