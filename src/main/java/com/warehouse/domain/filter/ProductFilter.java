@@ -18,8 +18,6 @@ public class ProductFilter{
 
     private String name;
     private String type;
-    private Date afterDate;
-    private Date beforeDate;
     private String productCode;
     private String barCode;
 }

@@ -1,17 +1,21 @@
 package com.warehouse.service;
 
 import com.warehouse.domain.dto.Product;
+import com.warehouse.domain.dto.TypeProducts;
 import com.warehouse.domain.filter.ProductFilter;
+import com.warehouse.repository.TypeProductsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Query;
 import java.util.List;
 
 @Service
 public class ProductService {
-    //    @Autowired
-//    private  JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplateTest;
+
     private final JdbcTemplate jdbcTemplate;
 
     public ProductService(JdbcTemplate jdbcTemplate) {
@@ -43,57 +47,40 @@ public class ProductService {
 
     public List<Product> searchProducts(ProductFilter filter) {
 
-        StringBuilder queryBldr = new StringBuilder("SELECT * " +
+        StringBuilder queryBldr = new StringBuilder("SELECT p.id," +
+                "       p.name, " +
+                "       p.description, " +
+                "       p.count_in_warehouse, " +
+                "       p.count_in_shop, " +
+                "       p.bar_code, " +
+                "       p.product_code, " +
+                "       p.purchase_price, " +
+                "       p.sale_price, " +
+                "       t.name " +
                 "FROM products AS p " +
-                "WHERE 1=1");
+                "       INNER JOIN type as t ON p.type_id = t.id " +
+                "WHERE 1 = 1");
 
         if (filter.getName() != null && !filter.getName().isEmpty()) {
             queryBldr.append(" and upper(p.NAME) LIKE %" + filter.getName().toUpperCase() + "%");
         }
         if (filter.getType() != null && !filter.getType().isEmpty()) {
-            queryBldr.append(" and upper(p.TYPE) LIKE %" + filter.getType().toUpperCase() + "%");
-        }
-        if (filter.getAfterDate() != null) {
-            queryBldr.append(" and p.EXPIRATION_DATE >=" + filter.getAfterDate());
-        }
-        if (filter.getBeforeDate() != null) {
-            queryBldr.append(" and p.EXPIRATION_DATE <=" + filter.getBeforeDate());
+            queryBldr.append(" and p.TYPE_ID = " + filter.getType());
         }
         if (filter.getProductCode() != null) {
             queryBldr.append(" and p.PRODUCT_CODE = " + filter.getProductCode());
         }
         if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
-            queryBldr.append(" and p.BAR_COD = "+ filter.getBarCode());
+            queryBldr.append(" and p.BAR_COD = " + filter.getBarCode());
         }
 
-        jdbcTemplate.update(queryBldr.toString());
+        List<Product> productList = jdbcTemplate.queryForList(queryBldr.toString(), Product.class);
 
-        return null;
+        return productList;
+    }
 
-//        if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
-//            query.setParameter("firstName", "%" + filter.getFirstName().toUpperCase() + "%");
-//        }
-//        if (filter.getLastName() != null && !filter.getLastName().isEmpty()) {
-//            query.setParameter("lastName", "%" + filter.getLastName().toUpperCase() + "%");
-//        }
-//        if (filter.getEmail() != null && !filter.getEmail().isEmpty()) {
-//            query.setParameter("email", "%" + filter.getEmail().toUpperCase() + "%");
-//        }
-//        if (filter.getDateFrom() != null) {
-//            query.setParameter("dateFrom", filter.getDateFrom());
-//        }
-//        if (filter.getDateTo() != null) {
-//            query.setParameter("dateTo", filter.getDateTo());
-//        }
-//        if (!filter.getInited().isEmpty()) {
-//            query.setParameter("inited", filter.getInited());
-//        }
-//
-////        String sql = "SELECT p.*,d.name,d.description,i.url from products as p INNER JOIN product_descriptions as d  " +
-////                "on (p.id = d.product_id) left join images i on p.id = i.product_id where d.lang_id=? and " + productIds + " p.category_id=? " +
-////                "and (d.name like ? or d.description like ?) LIMIT ?,?";
-////
-////        keyword = "%" + keyword + "%";
+    public void updateTypeProduct(List<TypeProducts> typeProducts){
 
     }
+
 }

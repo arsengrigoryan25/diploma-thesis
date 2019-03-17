@@ -23,7 +23,6 @@ public class Product implements Serializable {
 	private Integer count;
 	private String purchasePrice;
 	private String salePrice;
-	private Date expirationDate;
 	private String productCode;
 	private String barCode;
 
