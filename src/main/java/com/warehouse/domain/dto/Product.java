@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class Product implements Serializable {
 	private Integer count;
 	private String purchasePrice;
 	private String salePrice;
-	private String expirationDate;
+	private Date expirationDate;
 	private String productCode;
 	private String barCode;
 

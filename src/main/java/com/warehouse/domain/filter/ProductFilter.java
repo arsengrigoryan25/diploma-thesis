@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +18,8 @@ public class ProductFilter{
 
     private String name;
     private String type;
-    private String expirationDate;
+    private Date afterDate;
+    private Date beforeDate;
     private String productCode;
     private String barCode;
 }

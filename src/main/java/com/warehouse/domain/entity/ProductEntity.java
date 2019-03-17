@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,13 +26,13 @@ public class ProductEntity {
 	private Integer countInShop;
 	private String purchasePrice;
 	private String salePrice;
-	private String expirationDate;
+	private Date expirationDate;
 	@Column(unique = true)
 	private String productCode;
 	@Column(unique = true)
 	private String barCode;
 
-	public ProductEntity(String name, String type, String description, Integer countInWarehouse, Integer countInShop, String purchasePrice, String salePrice, String expirationDate, String productCode, String barCode) {
+	public ProductEntity(String name, String type, String description, Integer countInWarehouse, Integer countInShop, String purchasePrice, String salePrice, Date expirationDate, String productCode, String barCode) {
 		this.name = name;
 		this.type = type;
 		this.description = description;

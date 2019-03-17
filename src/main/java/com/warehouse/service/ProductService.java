@@ -6,10 +6,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Query;
+import java.util.List;
 
 @Service
 public class ProductService {
-//    @Autowired
+    //    @Autowired
 //    private  JdbcTemplate jdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
 
@@ -29,7 +30,7 @@ public class ProductService {
         String sql = " UPDATE products " +
                 "SET count_in_warehouse = count_in_warehouse + ?" +
                 "WHERE bar_code = ? ";
-        jdbcTemplate.update(sql, product.getCount(),product.getBarCode());
+        jdbcTemplate.update(sql, product.getCount(), product.getBarCode());
     }
 
     public void updateProductsInShop(Product product) {
@@ -37,62 +38,62 @@ public class ProductService {
         String sql = " UPDATE products " +
                 "SET count_in_warehouse = count_in_warehouse - ? , count_in_shop = count_in_shop + ? " +
                 "WHERE bar_code = ? ";
-        jdbcTemplate.update(sql, product.getCount(),product.getCount(),product.getBarCode());
+        jdbcTemplate.update(sql, product.getCount(), product.getCount(), product.getBarCode());
     }
 
-    public void searchProducts(ProductFilter filter) {
+    public List<Product> searchProducts(ProductFilter filter) {
 
+        StringBuilder queryBldr = new StringBuilder("SELECT * " +
+                "FROM products AS p " +
+                "WHERE 1=1");
 
-        StringBuilder queryBldr = new StringBuilder("
-
-        if (filter.getFirstName() != null && !filter.getFirstName().isEmpty()) {
-            queryBldr.append(" and upper(u.FIRST_NAME) LIKE :firstName");
+        if (filter.getName() != null && !filter.getName().isEmpty()) {
+            queryBldr.append(" and upper(p.NAME) LIKE %" + filter.getName().toUpperCase() + "%");
         }
-        if (filter.getLastName() != null && !filter.getLastName().isEmpty()) {
-            queryBldr.append(" and upper(u.LAST_NAME) LIKE :lastName");
+        if (filter.getType() != null && !filter.getType().isEmpty()) {
+            queryBldr.append(" and upper(p.TYPE) LIKE %" + filter.getType().toUpperCase() + "%");
         }
-        if (filter.getEmail() != null && !filter.getEmail().isEmpty()) {
-            queryBldr.append(" and upper(u.EMAIL) LIKE :email");
+        if (filter.getAfterDate() != null) {
+            queryBldr.append(" and p.EXPIRATION_DATE >=" + filter.getAfterDate());
         }
-        if (filter.getDateFrom() != null) {
-            queryBldr.append(" and u.CREATE_DATA >= :dateFrom");
+        if (filter.getBeforeDate() != null) {
+            queryBldr.append(" and p.EXPIRATION_DATE <=" + filter.getBeforeDate());
         }
-        if (filter.getDateTo() != null) {
-            queryBldr.append(" and u.CREATE_DATA <= :dateTo");
+        if (filter.getProductCode() != null) {
+            queryBldr.append(" and p.PRODUCT_CODE = " + filter.getProductCode());
         }
-        if (!filter.getInited().isEmpty()) {
-            queryBldr.append(" and u.INITED = :inited ");
-        }
-
-        Query query = hatisEM.createNativeQuery(queryBldr.toString());
-
-        if (filter.getFirstName() != null && !filter.getFirstName().isEmpty()) {
-            query.setParameter("firstName", "%" + filter.getFirstName().toUpperCase() + "%");
-        }
-        if (filter.getLastName() != null && !filter.getLastName().isEmpty()) {
-            query.setParameter("lastName", "%" + filter.getLastName().toUpperCase() + "%");
-        }
-        if (filter.getEmail() != null && !filter.getEmail().isEmpty()) {
-            query.setParameter("email", "%" + filter.getEmail().toUpperCase() + "%");
-        }
-        if (filter.getDateFrom() != null) {
-            query.setParameter("dateFrom", filter.getDateFrom());
-        }
-        if (filter.getDateTo() != null) {
-            query.setParameter("dateTo", filter.getDateTo());
-        }
-        if (!filter.getInited().isEmpty()) {
-            query.setParameter("inited", filter.getInited());
+        if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
+            queryBldr.append(" and p.BAR_COD = "+ filter.getBarCode());
         }
 
-        String sql = "SELECT p.*,d.name,d.description,i.url from products as p INNER JOIN product_descriptions as d  " +
-                "on (p.id = d.product_id) left join images i on p.id = i.product_id where d.lang_id=? and " + productIds + " p.category_id=? " +
-                "and (d.name like ? or d.description like ?) LIMIT ?,?";
+        jdbcTemplate.update(queryBldr.toString());
 
-        keyword = "%" + keyword + "%";
-        jdbcTemplate.update(sql, 1, cid, keyword, keyword, (page - 1) * itemPerPage, itemPerPage);
+        return null;
+
+//        if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
+//            query.setParameter("firstName", "%" + filter.getFirstName().toUpperCase() + "%");
+//        }
+//        if (filter.getLastName() != null && !filter.getLastName().isEmpty()) {
+//            query.setParameter("lastName", "%" + filter.getLastName().toUpperCase() + "%");
+//        }
+//        if (filter.getEmail() != null && !filter.getEmail().isEmpty()) {
+//            query.setParameter("email", "%" + filter.getEmail().toUpperCase() + "%");
+//        }
+//        if (filter.getDateFrom() != null) {
+//            query.setParameter("dateFrom", filter.getDateFrom());
+//        }
+//        if (filter.getDateTo() != null) {
+//            query.setParameter("dateTo", filter.getDateTo());
+//        }
+//        if (!filter.getInited().isEmpty()) {
+//            query.setParameter("inited", filter.getInited());
+//        }
+//
+////        String sql = "SELECT p.*,d.name,d.description,i.url from products as p INNER JOIN product_descriptions as d  " +
+////                "on (p.id = d.product_id) left join images i on p.id = i.product_id where d.lang_id=? and " + productIds + " p.category_id=? " +
+////                "and (d.name like ? or d.description like ?) LIMIT ?,?";
+////
+////        keyword = "%" + keyword + "%";
 
     }
-
-
 }
