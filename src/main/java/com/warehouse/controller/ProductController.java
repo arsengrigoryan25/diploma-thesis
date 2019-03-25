@@ -139,7 +139,7 @@ public class ProductController {
     public ModelAndView typeProduct(@RequestParam String id,
                                     @RequestParam String name
     ) {
-        typeProductsRepository.
+//        typeProductsRepository.
         return new ModelAndView("redirect:/createTypePage");
     }
 
