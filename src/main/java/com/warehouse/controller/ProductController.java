@@ -136,9 +136,7 @@ public class ProductController {
     }
 
     @GetMapping("/updateTypeProduct")
-    public ModelAndView typeProduct(@RequestParam String id,
-                                    @RequestParam String name
-    ) {
+    public ModelAndView typeProduct(@ModelAttribute TypeProducts registerUserInfe ) {
 //        typeProductsRepository.
         return new ModelAndView("redirect:/createTypePage");
     }
