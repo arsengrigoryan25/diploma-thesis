@@ -22,13 +22,6 @@ public class ProductService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void createProducts(Product product) {
-
-//        String sql = "INSERT INTO product (ID, DESCRIPTION, ID_COLUMN, NAME_COLUMN) VALUES ('RF_AGENCY', 'Agencies','ID', 'NAME')";
-//        jdbcTemplate.update(sql,count, product_code );
-
-    }
-
     public void updateProductsInWarehouse(Product product) {
 
         String sql = " UPDATE products " +

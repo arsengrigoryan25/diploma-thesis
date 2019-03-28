@@ -136,8 +136,9 @@ public class ProductController {
     }
 
     @GetMapping("/updateTypeProduct")
-    public ModelAndView typeProduct(@ModelAttribute TypeProducts registerUserInfe ) {
-//        typeProductsRepository.
+    public ModelAndView typeProduct(@ModelAttribute TypeProducts typeProducts ) {
+
+        typeProductsRepository.saveAll();
         return new ModelAndView("redirect:/createTypePage");
     }
 
