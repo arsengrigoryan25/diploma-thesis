@@ -135,12 +135,12 @@ public class ProductController {
         return model;
     }
 
-    @GetMapping("/updateTypeProduct")
-    public ModelAndView typeProduct(@ModelAttribute TypeProducts typeProducts ) {
-
-        typeProductsRepository.saveAll();
-        return new ModelAndView("redirect:/createTypePage");
-    }
+//    @GetMapping("/updateTypeProduct")
+//    public ModelAndView typeProduct(@ModelAttribute TypeProducts typeProducts ) {
+//
+//        typeProductsRepository.saveAll();
+//        return new ModelAndView("redirect:/createTypePage");
+//    }
 
 
 }
