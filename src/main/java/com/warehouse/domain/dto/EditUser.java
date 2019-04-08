@@ -3,8 +3,11 @@ package com.warehouse.domain.dto;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class EditUser {
+import java.io.Serializable;
 
+public class EditUser implements Serializable {
+
+    private static final long serialVersionUID = 6529115096976616069L;
     private int id;
 
     private String email;

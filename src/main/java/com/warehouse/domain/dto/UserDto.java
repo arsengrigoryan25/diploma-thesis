@@ -1,6 +1,10 @@
 package com.warehouse.domain.dto;
 
-public class UserDto {
+import java.io.Serializable;
+
+public class UserDto  implements Serializable {
+    private static final long serialVersionUID = 524714516820617469L;
+
     private int id;
     private String name;
     private String lastName;

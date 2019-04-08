@@ -16,7 +16,7 @@ import java.util.Date;
 @Setter
 public class Product implements Serializable {
 
-	private static final long serialVersionUID = 7142145741374776658L;
+	private static final long serialVersionUID = 5776458177054327256L;
 	private String name;
 	private String type;
 	private String description;

@@ -3,7 +3,11 @@ package com.warehouse.domain.dto;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class EditPassword {
+import java.io.Serializable;
+
+public class EditPassword  implements Serializable {
+
+    private static final long serialVersionUID = -2494618037338176337L;
 
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")

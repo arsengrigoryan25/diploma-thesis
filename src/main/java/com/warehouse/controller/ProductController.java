@@ -3,6 +3,7 @@ package com.warehouse.controller;
 import com.warehouse.domain.dto.Product;
 import com.warehouse.domain.dto.TypeProducts;
 import com.warehouse.domain.entity.ProductEntity;
+import com.warehouse.domain.entity.TypeProductsEntity;
 import com.warehouse.domain.filter.ProductFilter;
 import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.TypeProductsRepository;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,17 +34,17 @@ public class ProductController {
     @Inject
     private EntityManager em;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String greeting(Map<String, Object> model) {
         return "main";
     }
 
-    @GetMapping("/createPage")
+    @RequestMapping("/createPage")
     public String create() {
         return "createProduct";
     }
 
-    @GetMapping("/createProduct")
+    @RequestMapping("/createProduct")
     public String createProduct(@RequestParam String name,
                                 @RequestParam String typeId,
                                 @RequestParam String description,
@@ -63,7 +65,7 @@ public class ProductController {
         return "createProduct";
     }
 
-    @GetMapping("/addPage")
+    @RequestMapping("/addPage")
     public String addProduct() {
         List<ProductEntity> productEntity = productRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("addProduct");
@@ -71,7 +73,7 @@ public class ProductController {
         return "addProduct";
     }
 
-    @GetMapping("/addProductInWarehouse")
+    @RequestMapping("/addProductInWarehouse")
     public String addProductInWarehouse(@RequestParam String count,
                                         @RequestParam String productCode,
                                         @RequestParam String barcode
@@ -81,7 +83,7 @@ public class ProductController {
         return "addProductInWarehouse";
     }
 
-    @GetMapping("/addProductInShop")
+    @RequestMapping("/addProductInShop")
     public String addProductInShop(@RequestParam String count,
                                    @RequestParam String productCode,
                                    @RequestParam String barcode
@@ -91,51 +93,48 @@ public class ProductController {
         return "addProductInShop";
     }
 
-    @GetMapping("/searchPage")
+    @RequestMapping("/searchPage")
     public String search() {
         return "searchProduct";
     }
 
-    @GetMapping("/searchProduct")
+    @RequestMapping("/searchProduct")
     public String searchProduct(@RequestParam String name,
                                 @RequestParam String type,
                                 @RequestParam String productCode,
                                 @RequestParam String barcode
     ) {
-        List<Product> productEntity = productService.searchProducts(
-                new ProductFilter(name, type, productCode, barcode));
+        List<Product> productEntity = productService.searchProducts(new ProductFilter(name, type, productCode, barcode));
         ModelAndView modelAndView = new ModelAndView("searchProduct");
         modelAndView.addObject("product", productEntity);
         return "searchProduct";
     }
 
-    @GetMapping("/createTypePage")
+    @RequestMapping("/createTypePage")
     public ModelAndView createType() {
-        List<TypeProducts> typeProducts = typeProductsRepository.findAll();
-
-        ModelAndView model = new ModelAndView("createTypePage");
+        List<TypeProductsEntity> typeProducts = typeProductsRepository.findAll();
+        ModelAndView model = new ModelAndView("createProductType");
         model.addObject("typeProducts", typeProducts);
         return model;
     }
 
-    @GetMapping("/createTypeProduct")
-    public ModelAndView createTypeProduct(@RequestParam String id,
-                                          @RequestParam String name
+    @RequestMapping("/createTypeProduct")
+    public ModelAndView createTypeProduct(@RequestParam String name
     ) {
-        typeProductsRepository.save(new TypeProducts(new Integer(id), name));
+        typeProductsRepository.save(new TypeProductsEntity(name));
         return new ModelAndView("redirect:/createTypePage");
     }
 
-    @GetMapping("/updateTypePage")
+    @RequestMapping("/updateTypePage")
     public ModelAndView type() {
-        List<TypeProducts> typeProducts = typeProductsRepository.findAll();
+        List<TypeProductsEntity> typeProducts = typeProductsRepository.findAll();
 
         ModelAndView model = new ModelAndView("updateTypeProducts");
         model.addObject("typeProducts", typeProducts);
         return model;
     }
 
-//    @GetMapping("/updateTypeProduct")
+//    @RequestMapping("/updateTypeProduct")
 //    public ModelAndView typeProduct(@ModelAttribute TypeProducts typeProducts ) {
 //
 //        typeProductsRepository.saveAll();

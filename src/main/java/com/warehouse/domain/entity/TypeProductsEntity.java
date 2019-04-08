@@ -12,13 +12,17 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "type")
+@Table(name = "type_product")
 public class TypeProductsEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Integer id;
+	@Column(unique = true)
 	private String name;
 
+	public TypeProductsEntity(String name) {
+		this.name = name;
+	}
 }
