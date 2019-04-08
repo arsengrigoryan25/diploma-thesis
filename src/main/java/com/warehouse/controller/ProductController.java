@@ -9,6 +9,7 @@ import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.TypeProductsRepository;
 import com.warehouse.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,12 @@ public class ProductController {
 
     @Inject
     private EntityManager em;
+
+    private final JdbcTemplate jdbcTemplate;
+
+    public ProductController(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @RequestMapping("/")
     public String greeting(Map<String, Object> model) {

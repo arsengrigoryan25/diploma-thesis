@@ -13,8 +13,8 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplateTest;
+//    @Autowired
+//    private JdbcTemplate jdbcTemplateTest;
 
     private final JdbcTemplate jdbcTemplate;
 
