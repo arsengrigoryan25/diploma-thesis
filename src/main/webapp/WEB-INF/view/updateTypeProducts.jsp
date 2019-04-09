@@ -8,15 +8,14 @@
 <head>
 </head>
 <body>
-<form:form action="${pageContext.request.contextPath}/createTypeProduct">
-
+<form:form action="${pageContext.request.contextPath}/updateTypeProduct" method="post" modelAttribute="dictionaryContent">
     <div class="doc-list">
         <table class="negrTable">
             <tbody>
-            <c:forEach items="${typeProducts}" var="type">
+            <c:forEach items="${typeProducts}" var="type" varStatus="loop">
                 <tr>
-                    <td>${type.id}</td>
-                    <td>${type.name}</td>
+                    <td><input name="typeProductsList[${loop.index}].id" type="text" value="${type.id}"/></td>
+                    <td><input name="typeProductsList[${loop.index}].name" type="text" value="${type.name}"/></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -24,12 +23,7 @@
     </div>
     <div class=" clearfix">
         <div class="form-group">
-            <input id="addRow" type="submit" value="ավելացնել տող" class="btn save btn-primary mt-inp">
-        </div>
-    </div>
-    <div class=" clearfix">
-        <div class="form-group">
-            <input id="addProductType" type="submit" value="ավելացնել ապրանքի տիպ"  class="btn save btn-primary mt-inp">
+            <input id="addProductType" type="submit" value="թարմացնել ապրանքի տիպ" class="btn save btn-primary mt-inp">
         </div>
     </div>
 </form:form>

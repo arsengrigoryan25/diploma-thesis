@@ -1,5 +1,6 @@
 package com.warehouse.controller;
 
+import com.warehouse.domain.dto.DictionaryContent;
 import com.warehouse.domain.dto.Product;
 import com.warehouse.domain.dto.TypeProducts;
 import com.warehouse.domain.entity.ProductEntity;
@@ -9,6 +10,7 @@ import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.TypeProductsRepository;
 import com.warehouse.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,8 +52,10 @@ public class ProductController {
     }
 
     @RequestMapping("/createPage")
-    public String create() {
-        return "createProduct";
+    public ModelAndView create() {
+        ModelAndView modelAndView = new ModelAndView("createProduct");
+        modelAndView.addObject("product_typr",);
+        return modelAndView;
     }
 
     @RequestMapping("/createProduct")
@@ -133,20 +140,18 @@ public class ProductController {
     }
 
     @RequestMapping("/updateTypePage")
-    public ModelAndView type() {
+    public @ModelAttribute("dictionaryContent") ModelAndView type() {
         List<TypeProductsEntity> typeProducts = typeProductsRepository.findAll();
-
         ModelAndView model = new ModelAndView("updateTypeProducts");
         model.addObject("typeProducts", typeProducts);
         return model;
     }
 
-//    @RequestMapping("/updateTypeProduct")
-//    public ModelAndView typeProduct(@ModelAttribute TypeProducts typeProducts ) {
-//
-//        typeProductsRepository.saveAll();
-//        return new ModelAndView("redirect:/createTypePage");
-//    }
+    @RequestMapping(value = "/updateTypeProduct", method = RequestMethod.POST)
+    public ModelAndView typeProduct(@ModelAttribute("dictionaryContent") DictionaryContent dictionaryContent) throws IOException {
+        typeProductsRepository.saveAll(dictionaryContent.getTypeProductsList());
+        return new ModelAndView("redirect:/updateTypePage");
+    }
 
 
 }
