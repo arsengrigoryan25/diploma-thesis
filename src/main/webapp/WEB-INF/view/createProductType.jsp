@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<form:form action="${pageContext.request.contextPath}/createTypeProduct">
+<form:form>
     <div class="doc-list">
         <table class="negrTable">
             <tbody>
-            <c:forEach items="${typeProducts}" var="type">
+            <c:forEach items="${productType}" var="type">
                 <tr>
                     <td>${type.id}</td>
                     <td>${type.name}</td>
@@ -24,7 +24,7 @@
         </table>
     </div>
 </form:form>
-<form:form action="${pageContext.request.contextPath}/createTypeProduct">
+<form:form action="${pageContext.request.contextPath}/createProductType">
     <div class="doc-list">
         <input id="typeName" type="text" name="name" class="btn save btn-primary mt-inp">
     </div>

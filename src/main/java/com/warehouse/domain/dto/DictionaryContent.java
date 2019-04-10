@@ -1,6 +1,6 @@
 package com.warehouse.domain.dto;
 
-import com.warehouse.domain.entity.TypeProductsEntity;
+import com.warehouse.domain.entity.ProductTypeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,5 +17,5 @@ import java.util.List;
 public class DictionaryContent implements Serializable {
     private static final long serialVersionUID = -3242148698352390171L;
 
-    private List<TypeProductsEntity> typeProductsList;
+    private List<ProductTypeEntity> typeProductsList;
 }

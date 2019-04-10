@@ -1,10 +1,8 @@
 package com.warehouse.service;
 
 import com.warehouse.domain.dto.Product;
-import com.warehouse.domain.dto.TypeProducts;
+import com.warehouse.domain.dto.ProductType;
 import com.warehouse.domain.filter.ProductFilter;
-import com.warehouse.repository.TypeProductsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,7 @@ public class ProductService {
     public void updateProductsInWarehouse(Product product) {
 
         String sql = " UPDATE products " +
-                "SET count_in_warehouse = count_in_warehouse + ?" +
+                "SET count_in_warehouse = count_in_warehouse + ? " +
                 "WHERE bar_code = ? ";
         jdbcTemplate.update(sql, product.getCount(), product.getBarCode());
     }
@@ -72,7 +70,7 @@ public class ProductService {
         return productList;
     }
 
-    public void updateTypeProduct(List<TypeProducts> typeProducts){
+    public void updateTypeProduct(List<ProductType> typeProducts){
 
     }
 

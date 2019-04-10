@@ -12,8 +12,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "type_product")
-public class TypeProductsEntity {
+@Table(name = "product_type")
+public class ProductTypeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +22,7 @@ public class TypeProductsEntity {
 	@Column(unique = true)
 	private String name;
 
-	public TypeProductsEntity(String name) {
+	public ProductTypeEntity(String name) {
 		this.name = name;
 	}
 }

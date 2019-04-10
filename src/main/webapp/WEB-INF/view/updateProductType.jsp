@@ -8,14 +8,14 @@
 <head>
 </head>
 <body>
-<form:form action="${pageContext.request.contextPath}/updateTypeProduct" method="post" modelAttribute="dictionaryContent">
+<form:form action="${pageContext.request.contextPath}/updateProductType" method="post" modelAttribute="dictionaryContent">
     <div class="doc-list">
         <table class="negrTable">
             <tbody>
-            <c:forEach items="${typeProducts}" var="type" varStatus="loop">
+            <c:forEach items="${productType}" var="type" varStatus="loop">
                 <tr>
-                    <td><input name="typeProductsList[${loop.index}].id" type="text" value="${type.id}"/></td>
-                    <td><input name="typeProductsList[${loop.index}].name" type="text" value="${type.name}"/></td>
+                    <td><input name="productTypeList[${loop.index}].id" type="text" value="${type.id}"/></td>
+                    <td><input name="productTypeList[${loop.index}].name" type="text" value="${type.name}"/></td>
                 </tr>
             </c:forEach>
             </tbody>

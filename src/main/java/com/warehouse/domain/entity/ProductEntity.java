@@ -25,7 +25,6 @@ public class ProductEntity {
 	private Integer countInShop;
 	private String purchasePrice;
 	private String salePrice;
-	@Column(unique = true)
 	private String productCode;
 	@Column(unique = true)
 	private String barCode;

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TypeProducts implements Serializable {
+public class ProductType implements Serializable {
 	private static final long serialVersionUID = -6739739389089828179L;
 	private Integer id;
 	private String name;
