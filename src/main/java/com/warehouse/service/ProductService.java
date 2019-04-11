@@ -1,18 +1,20 @@
 package com.warehouse.service;
 
 import com.warehouse.domain.dto.Product;
-import com.warehouse.domain.dto.ProductType;
 import com.warehouse.domain.filter.ProductFilter;
+import com.warehouse.domain.rowMapper.ProductRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
 public class ProductService {
 
-//    @Autowired
-//    private JdbcTemplate jdbcTemplateTest;
+    @Inject
+    private EntityManager em;
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -25,7 +27,7 @@ public class ProductService {
         String sql = " UPDATE products " +
                 "SET count_in_warehouse = count_in_warehouse + ? " +
                 "WHERE bar_code = ? ";
-        jdbcTemplate.update(sql, product.getCount(), product.getBarCode());
+        jdbcTemplate.update(sql, product.getCountInWarehouse(), product.getBarCode());
     }
 
     public void updateProductsInShop(Product product) {
@@ -33,45 +35,39 @@ public class ProductService {
         String sql = " UPDATE products " +
                 "SET count_in_warehouse = count_in_warehouse - ? , count_in_shop = count_in_shop + ? " +
                 "WHERE bar_code = ? ";
-        jdbcTemplate.update(sql, product.getCount(), product.getCount(), product.getBarCode());
+        jdbcTemplate.update(sql, product.getCountInWarehouse(), product.getCountInShop(), product.getBarCode());
     }
 
     public List<Product> searchProducts(ProductFilter filter) {
 
-        StringBuilder queryBldr = new StringBuilder("SELECT p.id," +
+        StringBuilder queryBldr = new StringBuilder("SELECT " +
+                "       p.id," +
                 "       p.name, " +
                 "       p.description, " +
                 "       p.count_in_warehouse, " +
                 "       p.count_in_shop, " +
-                "       p.bar_code, " +
-                "       p.product_code, " +
                 "       p.purchase_price, " +
                 "       p.sale_price, " +
+                "       p.product_code, " +
+                "       p.bar_code, " +
                 "       t.name " +
-                "FROM products AS p " +
-                "       INNER JOIN type as t ON p.type_id = t.id " +
-                "WHERE 1 = 1");
+                " FROM products AS p " +
+                "       INNER JOIN product_type AS t ON p.product_type_id = t.id " +
+                " WHERE 1 = 1 ");
 
         if (filter.getName() != null && !filter.getName().isEmpty()) {
-            queryBldr.append(" and upper(p.NAME) LIKE %" + filter.getName().toUpperCase() + "%");
+            queryBldr.append(" AND upper(p.NAME) LIKE % ").append(filter.getName().toUpperCase()).append(" %");
         }
         if (filter.getType() != null && !filter.getType().isEmpty()) {
-            queryBldr.append(" and p.TYPE_ID = " + filter.getType());
+            queryBldr.append(" AND p.product_type_id = ").append(filter.getType());
         }
-        if (filter.getProductCode() != null) {
-            queryBldr.append(" and p.PRODUCT_CODE = " + filter.getProductCode());
+        if (filter.getProductCode() != null && !filter.getProductCode().isEmpty()) {
+            queryBldr.append(" AND p.product_code = ").append(filter.getProductCode());
         }
         if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
-            queryBldr.append(" and p.BAR_COD = " + filter.getBarCode());
+            queryBldr.append(" AND p.bar_code = ").append(filter.getBarCode());
         }
 
-        List<Product> productList = jdbcTemplate.queryForList(queryBldr.toString(), Product.class);
-
-        return productList;
+        return jdbcTemplate.query(queryBldr.toString(), new ProductRowMapper());
     }
-
-    public void updateTypeProduct(List<ProductType> typeProducts){
-
-    }
-
 }

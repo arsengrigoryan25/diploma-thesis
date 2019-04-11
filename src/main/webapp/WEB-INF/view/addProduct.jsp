@@ -5,14 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:a="http://www.custom.com/jsf/facelets"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jstl/core"
-      xmlns:rich="http://richfaces.org/rich">
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,14 +21,6 @@
                 <td><input id="countId" name="count" type="text" class="form-control"></td>
             </tr>
             <tr>
-                <td>Ապրանքի կոդը</td>
-                <td><input id="productCodeId" name="productCode" type="text" class="form-control"/></td>
-            </tr>
-            <tr>
-                <td>Շտրիխ կոդ<</td>
-                <td><input id="barCodeId" name="barcode" type="text" class="form-control"/></td>
-            </tr>
-            <tr>
                 <td>Ապրանքը ավելացնել</td>
                 <td>
                     <div class="custom-control custom-radio">
@@ -43,7 +29,7 @@
                     </div>
 
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="addProductStatus" value="False" >
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="addProductStatus" value="False">
                         <label class="custom-control-label" for="defaultGroupExample2">Խանութ</label>
                     </div>
                 </td>

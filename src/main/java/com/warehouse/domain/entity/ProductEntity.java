@@ -19,7 +19,7 @@ public class ProductEntity {
 	@Column(name = "ID")
 	private Integer id;
 	private String name;
-	private String typeId;
+	private String productTypeId;
 	private String description;
 	private Integer countInWarehouse;
 	private Integer countInShop;
@@ -29,9 +29,9 @@ public class ProductEntity {
 	@Column(unique = true)
 	private String barCode;
 
-	public ProductEntity(String name, String typeId, String description, Integer countInWarehouse, Integer countInShop, String purchasePrice, String salePrice, String productCode, String barCode) {
+	public ProductEntity(String name, String productTypeId, String description, Integer countInWarehouse, Integer countInShop, String purchasePrice, String salePrice, String productCode, String barCode) {
 		this.name = name;
-		this.typeId = typeId;
+		this.productTypeId = productTypeId;
 		this.description = description;
 		this.countInWarehouse = countInWarehouse;
 		this.countInShop = countInShop;

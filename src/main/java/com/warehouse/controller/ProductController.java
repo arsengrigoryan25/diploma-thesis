@@ -2,6 +2,7 @@ package com.warehouse.controller;
 
 import com.warehouse.domain.dto.DictionaryContent;
 import com.warehouse.domain.dto.Product;
+import com.warehouse.domain.dto.ProductView;
 import com.warehouse.domain.entity.ProductEntity;
 import com.warehouse.domain.entity.ProductTypeEntity;
 import com.warehouse.domain.filter.ProductFilter;
@@ -31,14 +32,10 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private TypeProductsRepository typeProductsRepository;
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @Inject
-    private EntityManager em;
 
-
+    @GetMapping
     @RequestMapping("/")
-    public String greeting(Map<String, Object> model) {
+    public String main() {
         return "main";
     }
 
@@ -46,19 +43,19 @@ public class ProductController {
     public ModelAndView create() {
         List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("createProduct");
-        modelAndView.addObject("productType",typeProducts);
+        modelAndView.addObject("productType", typeProducts);
         return modelAndView;
     }
 
     @RequestMapping("/createProduct")
     public ModelAndView createProduct(@RequestParam String name,
-                                @RequestParam String productType,
-                                @RequestParam String description,
-                                @RequestParam String countInWarehouse,
-                                @RequestParam String purchasePrice,
-                                @RequestParam String salePrice,
-                                @RequestParam String productCode,
-                                @RequestParam String barcode
+                                      @RequestParam String productType,
+                                      @RequestParam String description,
+                                      @RequestParam String countInWarehouse,
+                                      @RequestParam String purchasePrice,
+                                      @RequestParam String salePrice,
+                                      @RequestParam String productCode,
+                                      @RequestParam String barcode
     ) {
         ModelAndView modelAndView = new ModelAndView("createProduct");
         ProductEntity entity = new ProductEntity(name, productType, description, new Integer(countInWarehouse), 0,
@@ -67,7 +64,7 @@ public class ProductController {
             productRepository.save(entity);
         } catch (Exception e) {
             List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
-            modelAndView.addObject("productType",typeProducts);
+            modelAndView.addObject("productType", typeProducts);
             modelAndView.addObject("productEntity", entity);
             modelAndView.addObject("error", "Այս տվյալներով ապրանք արդեն գրանցված է");
             return modelAndView;
@@ -76,58 +73,62 @@ public class ProductController {
     }
 
     @RequestMapping("/addProductPage")
-    public ModelAndView addProduct() {
+    public ModelAndView addProductFirst() {
         return new ModelAndView("addProduct");
     }
 
     @RequestMapping("/addProduct")
     public ModelAndView addProductInWarehouse(@RequestParam String count,
-                                        @RequestParam String productCode,
-                                        @RequestParam String barcode,
-                                        @RequestParam String addProductStatus
+                                              @RequestParam String productCode,
+                                              @RequestParam String barcode,
+                                              @RequestParam String addProductStatus
     ) {
-        final String digitPattern = "^ \\d {0,9} $";
-        Product product = new Product(new Integer(count), productCode, barcode);
-        if(count.matches(digitPattern) && productCode.matches(digitPattern) && barcode.matches(digitPattern)){
-            if(new Boolean(addProductStatus)){
+        //TODO check product count in warehouse
+
+        final String digitPattern = "^\\d{0,13}|[ ]$";
+        Product product;
+        ModelAndView modelAndView = new ModelAndView("searchProduct");
+        if (count.trim().matches(digitPattern) && productCode.trim().matches(digitPattern) && barcode.trim().matches(digitPattern)) {
+            if (new Boolean(addProductStatus)) {
+                product = new Product(new Integer(count), 0, productCode, barcode);
                 productService.updateProductsInWarehouse(product);
-                return new ModelAndView("addProduct");
-            }else{
+                modelAndView.addObject("error", "Ապրանքը ավելացված է");
+            } else {
+                product = new Product(new Integer(count), new Integer(count), productCode, barcode);
                 productService.updateProductsInShop(product);
-                return new ModelAndView("addProduct");
+                modelAndView.addObject("error", "Ապրանքը ավելացված է");
             }
-        } else{
-            ModelAndView modelAndView = new ModelAndView("addProduct");
-            modelAndView.addObject("error","Դաշտերը պետքե լինեն թվերր");
+            return modelAndView;
+        } else {
+            modelAndView.addObject("error", "Դաշտերը պետքե լինեն թվերր");
             return modelAndView;
         }
-    }
 
-    @RequestMapping("/addProductInShop")
-    public String addProductInShop(@RequestParam String count,
-                                   @RequestParam String productCode,
-                                   @RequestParam String barcode
-    ) {
-        Product product = new Product(new Integer(count), productCode, barcode);
-        productService.updateProductsInShop(product);
-        return "addProductInShop";
     }
 
     @RequestMapping("/searchProductPage")
-    public String search() {
-        return "searchProduct";
+    public ModelAndView search() {
+        List<ProductTypeEntity> productType = typeProductsRepository.findAll();
+        ModelAndView model = new ModelAndView("searchProduct");
+        model.addObject("productType", productType);
+        return model;
     }
 
     @RequestMapping("/searchProduct")
-    public String searchProduct(@RequestParam String name,
-                                @RequestParam String type,
-                                @RequestParam String productCode,
-                                @RequestParam String barcode
+    public ModelAndView searchProduct(@RequestParam String name,
+                                      @RequestParam String productType,
+                                      @RequestParam String productCode,
+                                      @RequestParam String barcode
     ) {
-        List<Product> productEntity = productService.searchProducts(new ProductFilter(name, type, productCode, barcode));
-        ModelAndView modelAndView = new ModelAndView("searchProduct");
-        modelAndView.addObject("product", productEntity);
-        return "searchProduct";
+        Product filterValue = new Product(name, productType, productCode, barcode);
+        List<Product> productList = productService.searchProducts(new ProductFilter(name, productType, productCode, barcode));
+        List<ProductTypeEntity> productTypeEntities = typeProductsRepository.findAll();
+
+        ModelAndView model = new ModelAndView("searchProduct");
+        model.addObject("filterValue", filterValue);
+        model.addObject("productList", productList);
+        model.addObject("productType", productTypeEntities);
+        return model;
     }
 
     @RequestMapping("/createProductTypePage")
@@ -146,7 +147,8 @@ public class ProductController {
     }
 
     @RequestMapping("/updateProductTypePage")
-    public @ModelAttribute("dictionaryContent") ModelAndView type() {
+    public @ModelAttribute("dictionaryContent")
+    ModelAndView type() {
         List<ProductTypeEntity> productTypeEntities = typeProductsRepository.findAll();
         ModelAndView model = new ModelAndView("updateProductType");
         model.addObject("productType", productTypeEntities);
