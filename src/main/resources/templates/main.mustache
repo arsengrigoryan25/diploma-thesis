@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form action="/logout" method="get">
+    <form action="/login" method="get">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <input type="submit" value="Sign Out"/>
     </form>
@@ -16,11 +16,13 @@
     <br/>
     <a href="/searchProductPage">Search product</a>
     <br/>
-    <a href="/addProductPage">Add product</a>
-    <br/>
     <a href="/createProductPage">Add product type</a>
     <br/>
     <a href="/updateProductTypePage">Update product type</a>
+    <br/>
+    <a href="/createUserPage">Create user</a>
+    <br/>
+    <a href="/editUserPage">Edit user info</a>
 </form>
 </body>
 </html>

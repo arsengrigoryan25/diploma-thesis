@@ -23,7 +23,7 @@
                 <label>Տեսակ</label>
                 <select id="productTypeId" name="productType" class="form-control">
                     <c:forEach items="${productType}" var="type">
-                        <option value="${type.id}" <c:if test="${productEntity.typeId eq type.id}"> selected="selected" </c:if>>
+                        <option value="${type.id}" <c:if test="${productEntity.productTypeId eq type.id}"> selected="selected" </c:if>>
                                 ${type.name}
                         </option>
                     </c:forEach>

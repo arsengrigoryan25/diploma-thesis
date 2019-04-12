@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -21,7 +22,6 @@ public class UserEntity {
     private Long id;
     private String name;
     private String lastName;
-    private String status;
     private boolean active;
     @Column(unique = true)
     private String username;
@@ -32,6 +32,14 @@ public class UserEntity {
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<RoleEntity> roleEntities;
+    private List<RoleEntity> roleEntities;
 
+    public UserEntity(String name, String lastName, boolean active, String username, String password, List<RoleEntity> roleEntities) {
+        this.name = name;
+        this.lastName = lastName;
+        this.active = active;
+        this.username = username;
+        this.password = password;
+        this.roleEntities = roleEntities;
+    }
 }
