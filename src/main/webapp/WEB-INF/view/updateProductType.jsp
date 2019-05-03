@@ -10,6 +10,7 @@
 <body>
 <form:form action="${pageContext.request.contextPath}/updateProductType" method="post" modelAttribute="dictionaryContent">
     <div class="doc-list">
+        <a href="/">Գլխավոր էջ</a>
         <table class="negrTable">
             <tbody>
             <c:forEach items="${productType}" var="type" varStatus="loop">

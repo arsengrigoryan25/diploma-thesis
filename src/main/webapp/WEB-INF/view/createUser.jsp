@@ -13,7 +13,7 @@
 <form:form action="${pageContext.request.contextPath}/createUser">
     <label>${error}</label>
     <div class="doc-list">
-        <a href="/">Main page</a>
+        <a href="/">Գլխավոր էջ</a>
         <table class="negrTable">
             <tbody>
             <tr>

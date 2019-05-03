@@ -18,5 +18,5 @@ public class RoleEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int role;
+	private String role;
 }

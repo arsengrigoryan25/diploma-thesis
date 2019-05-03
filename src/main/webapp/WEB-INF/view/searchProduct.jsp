@@ -17,38 +17,40 @@
 <body>
 <form:form action="${pageContext.request.contextPath}/searchProduct">
     <div class="doc-list">
-        <a href="/">Main page</a>
+        <a href="/">Գլխավոր էջ</a>
         <table class="negrTable">
             <tbody>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label> Ապրանքի անուն</label>
-                <input id="nameId" name="name" type="text" class="form-control" value="${filterValue.name}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Տեսակ</label>
-                <select id="productTypeId" name="productType" class="form-control">
-                    <c:forEach items="${productType}" var="type">
-                        <option value="${type.id}"
-                        <c:if test="${filterValue.productTypeId eq type.id}"> selected="selected" </c:if>>
-                            ${type.name}
-                        </option>
-                    </c:forEach>
-                </select>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Ապրանքի կոդը</label>
-                <input id="productCodeId" name="productCode" type="text" class="form-control" value="${filterValue.productCode}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Շտրիխ կոդ</label>
-                <input id="barCodeId" name="barcode" type="text" class="form-control" value="${filterValue.barCode}"/>
-            </div>
+            <tr>
+                <td><label> Ապրանքի անուն</label></td>
+                <td><input id="nameId" name="name" type="text" class="form-control" value="${filterValue.name}"/></td>
+            </tr>
+            <tr>
+                <td><label>Տեսակ</label></td>
+                <td>
+                    <select id="productTypeId" name="productType" class="form-control">
+                        <c:forEach items="${productType}" var="type">
+                            <option value="${type.id}"
+                            <c:if test="${filterValue.productTypeId eq type.id}"> selected="selected" </c:if>>
+                                ${type.name}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Ապրանքի կոդը</label></td>
+                <td><input id="productCodeId" name="productCode" type="text" class="form-control" value="${filterValue.productCode}"/></td>
+            </tr>
+            <tr>
+                <td><label>Շտրիխ կոդ</label></td>
+                <td><input id="barCodeId" name="barcode" type="text" class="form-control" value="${filterValue.barCode}"/></td>
+            </tr>
             </tbody>
             <label>${error}</label>
         </table>
         <div class="form-wrap-inner clearfix">
             <div class="form-group mt-4">
-                <input type="submit" value="Search" class="btn btn-primary">
+                <input type="submit" value="Փնտրել" class="btn btn-primary">
             </div>
         </div>
 

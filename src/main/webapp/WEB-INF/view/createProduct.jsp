@@ -13,52 +13,58 @@
 <body>
 <form:form action="${pageContext.request.contextPath}/createProduct">
     <div class="doc-list">
-        <a href="/">Main page</a>
-        <div class="row">
-            <div class="form-group col-xs-12 col-lg-4">
-                <label> Ապրանքի անուն</label>
-                <input id="nameId"  name="name" type="text" class="form-control" value="${productEntity.name}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Տեսակ</label>
-                <select id="productTypeId" name="productType" class="form-control">
+        <a href="/">Գլխավոր էջ</a>
+        <table class="negrTable">
+            <tbody>
+            <tr>
+                <td><label>Ապրանքի անուն</label></td>
+                <td><input id="nameId"  name="name" type="text" class="form-control" value="${productEntity.name}"/></td>
+            </tr>
+            <tr>
+                <td><label>Տեսակ</label></td>
+                <td><select id="productTypeId" name="productType" class="form-control">
                     <c:forEach items="${productType}" var="type">
                         <option value="${type.id}" <c:if test="${productEntity.productTypeId eq type.id}"> selected="selected" </c:if>>
                                 ${type.name}
                         </option>
                     </c:forEach>
-                </select>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Նկարագրությունը</label>
-                <input id="descriptionId" name="description" type="text" class="form-control" value="${productEntity.description}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Քանակը</label>
-                <input id="countId" name="countInWarehouse" type="text" class="form-control" value="${productEntity.countInWarehouse}">
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Գնման գին</label>
-                <input id="purchasePriceId" name="purchasePrice" type="text" class="form-control" value="${productEntity.purchasePrice}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Վաճառքի գին</label>
-                <input id="salePriceId" name="salePrice" type="text" class="form-control" value="${productEntity.salePrice}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Ապրանքի կոդը</label>
-                <input id="productCodeId" name="productCode" type="text" class="form-control" value="${productEntity.productCode}"/>
-            </div>
-            <div class="form-group col-xs-12 col-lg-4">
-                <label>Շտրիխ կոդ</label>
-                <input id="barCodeId" name="barcode" type="text" class="form-control" />
-                <label>${error}</label>
-            </div>
+                </select></td>
+            </tr>
+            <tr>
+                <td><label>Նկարագրությունը</label></td>
+                <td><input id="descriptionId" name="description" type="text" class="form-control" value="${productEntity.description}"/></td>
+            </tr>
+            <tr>
+                <td><label>Քանակը</label></td>
+                <td><input id="countId" name="countInWarehouse" type="text" class="form-control" value="${productEntity.countInWarehouse}"></td>
+            </tr>
+            <tr>
+                <td><label>Գնման գին</label></td>
+                <td><input id="purchasePriceId" name="purchasePrice" type="text" class="form-control" value="${productEntity.purchasePrice}"/></td>
+            </tr>
+            <tr>
+                <td><label>Վաճառքի գին</label></td>
+                <td><input id="salePriceId" name="salePrice" type="text" class="form-control" value="${productEntity.salePrice}"/></td>
+            </tr>
+            <tr>
+                <td><label>Ապրանքի կոդը</label></td>
+                <td><input id="productCodeId" name="productCode" type="text" class="form-control" value="${productEntity.productCode}"/></td>
+            </tr>
+            <tr>
+                <td><label>Շտրիխ կոդ</label></td>
+                <td><input id="barCodeId" name="barcode" type="text" class="form-control" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+            <label>${error}</label>
+        </table>
 
-        </div>
         <div class="form-wrap-inner clearfix">
             <div class="form-group mt-4">
-                <input type="submit" value="Search" class="btn btn-primary"/>
+                <input type="submit" value="Ավելացնել ապրանք" class="btn btn-primary"/>
             </div>
         </div>
     </div>

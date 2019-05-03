@@ -3,11 +3,9 @@ package com.warehouse.controller;
 import com.warehouse.domain.dto.DictionaryContent;
 import com.warehouse.domain.dto.Product;
 import com.warehouse.domain.dto.User;
-import com.warehouse.domain.entity.ProductEntity;
-import com.warehouse.domain.entity.ProductTypeEntity;
-import com.warehouse.domain.entity.RoleEntity;
-import com.warehouse.domain.entity.UserEntity;
+import com.warehouse.domain.entity.*;
 import com.warehouse.domain.filter.ProductFilter;
+import com.warehouse.repository.InfoRepository;
 import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.TypeProductsRepository;
 import com.warehouse.repository.UserRepository;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,11 +27,12 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
+    private InfoRepository infoRepository;
+    @Autowired
     private ProductService productService;
     @Autowired
     private TypeProductsRepository typeProductsRepository;
 
-    @GetMapping
     @RequestMapping("/")
     public String main() {
         return "main";
@@ -55,12 +55,15 @@ public class ProductController {
                                       @RequestParam String salePrice,
                                       @RequestParam String productCode,
                                       @RequestParam String barcode
+
     ) {
         ModelAndView modelAndView = new ModelAndView("createProduct");
         ProductEntity entity = new ProductEntity(name, productType, description, new Integer(countInWarehouse), 0,
                 purchasePrice, salePrice, productCode, barcode);
+
         try {
             productRepository.save(entity);
+            infoRepository.save(new InfoEntity(new Date(), "Stextsvel e apranq, anwun - " + name + "code -" + productCode + " shtrix code - " + barcode));
         } catch (Exception e) {
             List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
             modelAndView.addObject("productType", typeProducts);
@@ -91,10 +94,14 @@ public class ProductController {
             if (new Boolean(addProductStatus)) {
                 product = new Product(new Integer(count), 0, productCode, barcode);
                 productService.updateProductsInWarehouse(product);
+                infoRepository.save(new InfoEntity(new Date(), "Avelacvel e " + count + "hat apranq pahestum, code -" + productCode + " shtrix code - " + barcode));
+
                 modelAndView.addObject("error", "Ապրանքը ավելացված է");
             } else {
                 product = new Product(new Integer(count), new Integer(count), productCode, barcode);
                 productService.updateProductsInShop(product);
+                infoRepository.save(new InfoEntity(new Date(), "Avelacvel e " + count + "hat apranq xanutum, code -" + productCode + " shtrix code - " + barcode));
+
                 modelAndView.addObject("error", "Ապրանքը ավելացված է");
             }
             return modelAndView;
@@ -160,41 +167,37 @@ public class ProductController {
         return new ModelAndView("redirect:/updateProductTypePage");
     }
 
-    @RequestMapping("/createUserPage")
-    public ModelAndView createProduct( ) {
-        ModelAndView modelAndView = new ModelAndView("createUser");
-        return modelAndView;
-    }
-
-    @RequestMapping("/createUser")
-    public ModelAndView createProduct(@RequestParam String name,
-                                      @RequestParam String lastName,
-                                      @RequestParam String status,
-                                      @RequestParam String active,
-                                      @RequestParam String username,
-                                      @RequestParam String password
-    ) {
-        boolean flag = new Boolean(active) ? true : false;
-        boolean role = new Boolean(status) ? true : false;
-        RoleEntity roleEntity = new RoleEntity();
-        roleEntity.setRole(User.Role.ROLE_ADMIN.ordinal());
-
-        User.Role.ROLE_ADMIN
-
-        UserEntity userEntity = new UserEntity(name,lastName,flag,username,password,role);
-        try {
-            userRepository.save(userEntity);
-        } catch (Exception e) {
-            List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
-            modelAndView.addObject("productType", typeProducts);
-            modelAndView.addObject("productEntity", entity);
-            modelAndView.addObject("error", "Այս տվյալներով ապրանք արդեն գրանցված է");
-            return modelAndView;
-        }
-        return new ModelAndView("redirect:createProductPage");
-        ModelAndView modelAndView = new ModelAndView("createUser");
-        return modelAndView;
-    }
-
-
+//    @RequestMapping("/createUserPage")
+//    public ModelAndView createProduct() {
+//        ModelAndView modelAndView = new ModelAndView("createUser");
+//        modelAndView.addObject("role", new User());
+//        return modelAndView;
+//    }
+//
+//    @RequestMapping("/createUser")
+//    public ModelAndView createProduct(@RequestParam String name,
+//                                      @RequestParam String lastName,
+//                                      @RequestParam String status,
+//                                      @RequestParam String active,
+//                                      @RequestParam String username,
+//                                      @RequestParam String password
+//    ) {
+//        boolean flag = new Boolean(active) ? true : false;
+//        boolean role = new Boolean(status) ? true : false;
+//        RoleEntity roleEntity = new RoleEntity();
+//        roleEntity.setRole(User.Role.ROLE_ADMIN.ordinal());
+//
+//        UserEntity userEntity = new UserEntity(name, lastName, , flag, username, password);
+//
+//        ModelAndView modelAndView = new ModelAndView("createUser");
+//        try {
+//            userRepository.save(userEntity);
+//        } catch (Exception e) {
+//            List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
+//            modelAndView.addObject("productType", typeProducts);
+////            modelAndView.addObject("productEntity", entity);
+//            modelAndView.addObject("error", "Այս տվյալներով ապրանք արդեն գրանցված է");
+//            return modelAndView;
+//        }
+//        return new ModelAndView("createUser");
 }

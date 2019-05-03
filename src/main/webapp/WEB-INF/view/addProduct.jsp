@@ -17,6 +17,9 @@
         <table class="negrTable">
             <tbody>
             <tr>
+                <td><a href="/">Գլխավոր էջ</a></td>
+            </tr>
+            <tr>
                 <td>Քանակը</td>
                 <td><input id="countId" name="count" type="text" class="form-control"></td>
             </tr>

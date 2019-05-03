@@ -23,4 +23,8 @@ public class InfoEntity {
 	private Date changeDate;
 	private String info;
 
+	public InfoEntity(Date changeDate, String info) {
+		this.changeDate = changeDate;
+		this.info = info;
+	}
 }

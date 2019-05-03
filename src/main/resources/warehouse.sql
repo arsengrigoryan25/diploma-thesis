@@ -1,6 +1,6 @@
-INSERT INTO users (id, active, status, last_name, name, username, password)
-VALUES (1, true, '1', 'arsen', 'grigoryan', 'ars', 'ars'),
-       (2, true, '1', 'arman', 'grigoryan', 'arm', 'arm');
+INSERT INTO users (id, active, last_name, name, username, password)
+VALUES (1, true,'arsen', 'grigoryan', 'ars', 'ars'),
+       (2, true,'arman', 'grigoryan', 'arm', 'arm');
 
 -- Dumping data for table role
 INSERT INTO role (id, role)
@@ -12,21 +12,21 @@ INSERT INTO user_role (user_id, role_id)
 VALUES (1, 1),
        (2, 2);
 # ====================================================================================================================================================
+INSERT INTO products (id, name, product_type_id, description, count_in_warehouse, count_in_shop, purchase_price, sale_price,
+                      product_code, bar_code)
+VALUES (1, 'spichka', '9', 'haykakan lucki', 10, 5, '100', '110', '12345678', '87654321'),
+       (2, 'cello', '3', 'sev grich', 10, 5, '120', '130', '23456789', '98765432');
 
--- ----------------------------------------------------------------------------------------------------------------
-
-INSERT INTO products (id,name,type_id,description,count_in_warehouse,count_in_shop,purchase_price,sale_price,expiration_date,
-                      product_code,bar_code)
-VALUES (1, 'spichka', 'lucki', 'haykakan lucki', 10, 5, '100', '110', '2018-02-02', '12345678', '87654321'),
-       (2, 'cello', 'grich', 'sev grich', 10, 5, '120', '130', '2018-02-02', '23456789', '98765432');
-
-
-UPDATE products
-SET count_in_warehouse = count_in_warehouse + '10',
-    count_in_shop = count_in_shop + '10'
-WHERE bar_code = '87654321';
-commit ;
-
+INSERT INTO type (id, name)
+VALUES (1, 'Tey'),
+       (2, 'Makaron'),
+       (3, 'Grich'),
+       (4, 'Oxi'),
+       (5, 'Gini'),
+       (6, 'Kwnyak'),
+       (7, 'Tsxaxot'),
+       (8, 'Mastak'),
+       (9, 'Lwucki');
 
 
 
