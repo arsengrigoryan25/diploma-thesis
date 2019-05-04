@@ -12,11 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class User implements Serializable {
-
-    public enum Role{
-        ROLE_ADMIN, ROLE_USER
-    }
-
     private static final long serialVersionUID = 2331727468970096533L;
 
     private int id;
@@ -26,5 +21,7 @@ public class User implements Serializable {
     private String email;
     private String password;
 
-
+    public enum Role{
+        ADMIN, USER
+    }
 }

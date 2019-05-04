@@ -32,6 +32,12 @@
         <tr>
             <td><a href="/updateProductTypePage">Թարմացնել ապրանքի տեսակ</a></td>
         </tr>
+        <tr>
+            <td><a href="/createUserPage">Ստեղծել օգտատեր</a></td>
+        </tr>
+        <tr>
+            <td><a href="/updateUserPage">Թարմացնել օգտատերի տվյալները</a></td>
+        </tr>
         </tbody>
     </table>
 </div>

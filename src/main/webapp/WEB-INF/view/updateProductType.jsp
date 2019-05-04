@@ -15,7 +15,7 @@
             <tbody>
             <c:forEach items="${productType}" var="type" varStatus="loop">
                 <tr>
-                    <td><input name="productTypeList[${loop.index}].id" type="text" value="${type.id}"/></td>
+                    <td><input name="productTypeList[${loop.index}].id" type="text" value="${type.id}" readonly/></td>
                     <td><input name="productTypeList[${loop.index}].name" type="text" value="${type.name}"/></td>
                 </tr>
             </c:forEach>

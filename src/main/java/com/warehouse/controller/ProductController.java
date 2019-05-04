@@ -1,8 +1,6 @@
 package com.warehouse.controller;
 
-import com.warehouse.domain.dto.DictionaryContent;
-import com.warehouse.domain.dto.Product;
-import com.warehouse.domain.dto.User;
+import com.warehouse.domain.dto.*;
 import com.warehouse.domain.entity.*;
 import com.warehouse.domain.filter.ProductFilter;
 import com.warehouse.repository.InfoRepository;
@@ -16,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class ProductController {
@@ -32,6 +29,17 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private TypeProductsRepository typeProductsRepository;
+
+    private final List<Role> roles = new ArrayList<>();
+    private final Map<String, Integer> rolesMap = new HashMap<>();
+
+    {
+        roles.add(new Role(0, "Ադմինիստրատոր"));
+        roles.add(new Role(1, "Օգտատեր"));
+
+        rolesMap.put("Ադմինիստրատոր", 0);
+        rolesMap.put("Օգտատեր", 1);
+    }
 
     @RequestMapping("/")
     public String main() {
@@ -163,41 +171,69 @@ public class ProductController {
 
     @RequestMapping(value = "/updateProductType", method = RequestMethod.POST)
     public ModelAndView typeProduct(@ModelAttribute("dictionaryContent") DictionaryContent dictionaryContent) throws IOException {
-        typeProductsRepository.saveAll(dictionaryContent.getTypeProductsList());
+        typeProductsRepository.saveAll(dictionaryContent.getProductTypeList());
         return new ModelAndView("redirect:/updateProductTypePage");
     }
 
-//    @RequestMapping("/createUserPage")
-//    public ModelAndView createProduct() {
-//        ModelAndView modelAndView = new ModelAndView("createUser");
-//        modelAndView.addObject("role", new User());
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping("/createUser")
-//    public ModelAndView createProduct(@RequestParam String name,
-//                                      @RequestParam String lastName,
-//                                      @RequestParam String status,
-//                                      @RequestParam String active,
-//                                      @RequestParam String username,
-//                                      @RequestParam String password
-//    ) {
-//        boolean flag = new Boolean(active) ? true : false;
-//        boolean role = new Boolean(status) ? true : false;
-//        RoleEntity roleEntity = new RoleEntity();
-//        roleEntity.setRole(User.Role.ROLE_ADMIN.ordinal());
-//
-//        UserEntity userEntity = new UserEntity(name, lastName, , flag, username, password);
-//
-//        ModelAndView modelAndView = new ModelAndView("createUser");
-//        try {
-//            userRepository.save(userEntity);
-//        } catch (Exception e) {
-//            List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
-//            modelAndView.addObject("productType", typeProducts);
-////            modelAndView.addObject("productEntity", entity);
-//            modelAndView.addObject("error", "Այս տվյալներով ապրանք արդեն գրանցված է");
-//            return modelAndView;
-//        }
-//        return new ModelAndView("createUser");
+//---------------------------------------------------------------------------------------------------------------------
+    @RequestMapping("/updateUserPage")
+    public @ModelAttribute("userContent")
+    ModelAndView user() {
+        List<UserEntity> userEntities = userRepository.findAll();
+        ModelAndView modelAndView = new ModelAndView("updateUser");
+        modelAndView.addObject("userRoles", roles);
+        modelAndView.addObject("users", userEntities);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public ModelAndView updateUser(@ModelAttribute("userContent") UserContent userContent) throws IOException {
+        ModelAndView modelAndView;
+        try {
+            userRepository.saveAll(userContent.getUserEntityList());
+            modelAndView =  new ModelAndView("redirect:/updateUserPage");
+        } catch (Exception e) {
+            modelAndView =  new ModelAndView("updateUser");
+            modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
+        }
+        return modelAndView;
+    }
+//---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+    @RequestMapping("/createUserPage")
+    public ModelAndView createUser() {
+        ModelAndView modelAndView = new ModelAndView("createUser");
+        modelAndView.addObject("userRoles", roles);
+        return modelAndView;
+    }
+
+    @RequestMapping("/createUser")
+    public ModelAndView createUser(@RequestParam String name,
+                                   @RequestParam String lastName,
+                                   @RequestParam String userRoles,
+                                   @RequestParam String active,
+                                   @RequestParam String username,
+                                   @RequestParam String password
+    ) {
+        boolean flag = new Boolean(active);
+        UserEntity userEntity = new UserEntity(name, lastName, rolesMap.get(userRoles), flag, username, password);
+
+        ModelAndView modelAndView = new ModelAndView("createUser");
+        modelAndView.addObject("userRoles", roles);
+        try {
+            userRepository.save(userEntity);
+        } catch (Exception e) {
+            modelAndView.addObject("userInfo", userEntity);
+            modelAndView.addObject("error", "Այս տվյալներով օգտատեր արդեն գրանցված է");
+        }
+        return modelAndView;
+    }
+
+
+
+
+
 }

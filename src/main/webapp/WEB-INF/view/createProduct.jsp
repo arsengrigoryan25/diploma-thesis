@@ -59,7 +59,6 @@
                 <td></td>
             </tr>
             </tbody>
-            <label>${error}</label>
         </table>
 
         <div class="form-wrap-inner clearfix">
@@ -68,6 +67,7 @@
             </div>
         </div>
     </div>
+    <label>${error}</label>
 </form:form>
 </body>
 </html>

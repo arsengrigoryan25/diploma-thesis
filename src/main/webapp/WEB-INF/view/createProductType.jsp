@@ -33,5 +33,6 @@
         <input id="addProductType" type="submit" value="ավելացնել ապրանքի տիպ" class="btn save btn-primary mt-inp">
     </div>
 </form:form>
+<label>${error}</label>
 </body>
 </html>

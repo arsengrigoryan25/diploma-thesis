@@ -7,16 +7,16 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-@Entity
-@Table(name = "role")
-public class RoleEntity {
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private String role;
-}
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Getter
+//@Setter
+//@Entity
+//@Table(name = "role")
+//public class RoleEntity {
+//
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//	private int id;
+//	private String role;
+//}

@@ -22,24 +22,19 @@ public class UserEntity {
     private Long id;
     private String name;
     private String lastName;
+    private Integer role;
     private boolean active;
     @Column(unique = true)
     private String username;
     @Column(unique = true)
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<RoleEntity> roleEntities;
-
-    public UserEntity(String name, String lastName, boolean active, String username, String password, List<RoleEntity> roleEntities) {
+    public UserEntity(String name, String lastName, Integer role, boolean active, String username, String password) {
         this.name = name;
         this.lastName = lastName;
+        this.role = role;
         this.active = active;
         this.username = username;
         this.password = password;
-        this.roleEntities = roleEntities;
     }
 }

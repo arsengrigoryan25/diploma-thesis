@@ -33,13 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("USER, ADMIN")
-                .antMatchers("/addProduct").hasAnyAuthority("USER, ADMIN")
-                .antMatchers("/createProduct").hasAnyAuthority("USER, ADMIN")
-                .antMatchers("/createProductType").hasAnyAuthority("USER, ADMIN")
-                .antMatchers("/createUser").hasAnyAuthority("USER, ADMIN")
-                .antMatchers("/searchProduct").hasAnyAuthority("USER, ADMIN")
-                .antMatchers("/updateProductType").hasAnyAuthority("USER, ADMIN")
+                .antMatchers("/").hasAnyAuthority("0, 1")
+                .antMatchers("/addProduct").hasAnyAuthority("0, 1")
+                .antMatchers("/createProduct").hasAnyAuthority("0, 1")
+                .antMatchers("/createProductType").hasAnyAuthority("0, 1")
+                .antMatchers("/createUser").hasAnyAuthority("0, 1")
+                .antMatchers("/searchProduct").hasAnyAuthority("0, 1")
+                .antMatchers("/updateProductType").hasAnyAuthority("0, 1")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -62,10 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("SELECT username, password, active " +
                         "FROM users " +
                         "WHERE username=?")
-                .authoritiesByUsernameQuery("SELECT u.username, r.role " +
+                .authoritiesByUsernameQuery("SELECT u.username, u.role " +
                         "FROM users u " +
-                        "INNER JOIN user_role ur on(u.id = ur.user_id) " +
-                        "INNER JOIN role r on(ur.role_id=r.id) " +
                         "WHERE u.username=?");
     }
 
