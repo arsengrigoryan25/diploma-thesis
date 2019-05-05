@@ -28,7 +28,7 @@
                 <td>
                     <select id="userRolesId" name="userRoles" class="form-control">
                         <c:forEach items="${userRoles}" var="role">
-                            <option value="${role.role}" <c:if test="${userInfo.role eq role.id}"> selected="selected" </c:if>>
+                            <option value="${role.id}" <c:if test="${userInfo.role eq role.id}"> selected="selected" </c:if>>
                                     ${role.role}
                             </option>
                         </c:forEach>
