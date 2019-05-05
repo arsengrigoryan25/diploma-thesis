@@ -20,7 +20,7 @@
 -- USE warehouse;
 --
 
--- CREATE DATABASE warehouse CHARACTER SET utf8 COLLATE utf8_general_ci
+CREATE DATABASE warehouse CHARACTER SET utf8 COLLATE utf8_general_ci
 
 create table users
 (

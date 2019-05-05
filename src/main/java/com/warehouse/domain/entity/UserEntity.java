@@ -22,14 +22,14 @@ public class UserEntity {
     private Long id;
     private String name;
     private String lastName;
-    private Integer role;
+    private String role;
     private boolean active;
     @Column(unique = true)
     private String username;
     @Column(unique = true)
     private String password;
 
-    public UserEntity(String name, String lastName, Integer role, boolean active, String username, String password) {
+    public UserEntity(String name, String lastName, String role, boolean active, String username, String password) {
         this.name = name;
         this.lastName = lastName;
         this.role = role;

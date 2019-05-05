@@ -33,8 +33,8 @@ VALUES (1, 'Tey'),
 # -------------------------------------------------------------------
 
 INSERT INTO users (id, last_name, name, role, active, username, password)
-VALUES (1, 'arsen', 'grigoryan', 0, true,'ars', 'ars'),
-       (2, 'arman', 'grigoryan', 1, true,'arm', 'arm');
+VALUES (1, 'arsen', 'grigoryan', '0', true,'ars', 'ars'),
+       (2, 'arman', 'grigoryan', '1', true,'arm', 'arm');
 
 INSERT INTO products (id, name, product_type_id, description, count_in_warehouse, count_in_shop, purchase_price, sale_price,
                       product_code, bar_code)

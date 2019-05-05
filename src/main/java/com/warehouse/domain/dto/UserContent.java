@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserContent implements Serializable{
-
     private static final long serialVersionUID = -8534466736389213305L;
-    private List<UserEntity> userEntityList;
+
+    private List<UserEntity> userList;
 }

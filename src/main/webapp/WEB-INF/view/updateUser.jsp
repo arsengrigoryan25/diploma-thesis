@@ -13,32 +13,33 @@
         <a href="/">Գլխավոր էջ</a>
         <table class="negrTable">
             <tbody>
-            <c:forEach items="${users}" var="user" varStatus="loop">
+            <c:forEach items="${users}" var="var" varStatus="loop">
                 <tr>
-                    <td><input name="usersList[${loop.index}].id" type="text" value="${user.id}" readonly/></td>
-                    <td><input name="usersList[${loop.index}].name" type="text" value="${user.name}"/></td>
-                    <td><input name="usersList[${loop.index}].lastName" type="text" value="${user.lastName}"/></td>
-                    <td><select name="usersList[${loop.index}].role" class="form-control">
+                    <td><input name="userList[${loop.index}].id" type="text" value="${var.id}" readonly/></td>
+                    <td><input name="userList[${loop.index}].name" type="text" value="${var.name}"/></td>
+                    <td><input name="userList[${loop.index}].lastName" type="text" value="${var.lastName}"/></td>
+                    <td><select name="userList[${loop.index}].role" class="form-control">
                         <c:forEach items="${userRoles}" var="role">
-                            <option value="${role.role}" <c:if test="${user.role eq role.id}"> selected="selected" </c:if>>
-                                    ${role.role}
-                            </option>
+                        <option value="${role.id}" <c:if test="${var.role eq role.id}"> selected="selected" </c:if>>
+                                ${role.role}
+                        </option>
                         </c:forEach>
-                    </td></select>
-                    <td>
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="usersList[${loop.index}].active" value="true" checked
-                                   <c:if test="${user.active == true}">checked</c:if>>
+                    </select></td>
+                    <td><div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="userList[${loop.index}].active"
+                                   value="true" checked
+                                   <c:if test="${var.active == true}">checked</c:if>>
                             <label class="custom-control-label" for="defaultGroupExample1">ակտիվ</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="usersList[${loop.index}].active" value="False"
-                                   <c:if test="${user.active == false}">checked</c:if>>
+                            <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="userList[${loop.index}].active"
+                                   value="False"
+                                   <c:if test="${var.active == false}">checked</c:if>>
                             <label class="custom-control-label" for="defaultGroupExample2">պասիվ</label>
                         </div>
                     </td>
-                    <td><input name="usersList[${loop.index}].username" type="text" value="${user.username}"/></td>
-                    <td><input name="usersList[${loop.index}].password" type="text" value="${user.password}"/></td>
+                    <td><input name="userList[${loop.index}].username" type="text" value="${var.username}"/></td>
+                    <td><input name="userList[${loop.index}].password" type="text" value="${var.password}"/></td>
                 </tr>
             </c:forEach>
             </tbody>

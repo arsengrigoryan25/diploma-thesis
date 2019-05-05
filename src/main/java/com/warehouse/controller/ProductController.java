@@ -31,20 +31,17 @@ public class ProductController {
     private TypeProductsRepository typeProductsRepository;
 
     private final List<Role> roles = new ArrayList<>();
-    private final Map<String, Integer> rolesMap = new HashMap<>();
 
     {
-        roles.add(new Role(0, "Ադմինիստրատոր"));
+        roles.add(new Role(0,"Ադմինիստրատոր"));
         roles.add(new Role(1, "Օգտատեր"));
-
-        rolesMap.put("Ադմինիստրատոր", 0);
-        rolesMap.put("Օգտատեր", 1);
     }
 
     @RequestMapping("/")
     public String main() {
         return "main";
     }
+//    ================================================================================================================================================
 
     @RequestMapping("/createProductPage")
     public ModelAndView create() {
@@ -81,6 +78,7 @@ public class ProductController {
         }
         return new ModelAndView("redirect:createProductPage");
     }
+//    ================================================================================================================================================
 
     @RequestMapping("/addProductPage")
     public ModelAndView addProductFirst() {
@@ -119,6 +117,7 @@ public class ProductController {
         }
 
     }
+//    ================================================================================================================================================
 
     @RequestMapping("/searchProductPage")
     public ModelAndView search() {
@@ -144,6 +143,7 @@ public class ProductController {
         model.addObject("productType", productTypeEntities);
         return model;
     }
+//    ================================================================================================================================================
 
     @RequestMapping("/createProductTypePage")
     public ModelAndView createType() {
@@ -175,32 +175,7 @@ public class ProductController {
         return new ModelAndView("redirect:/updateProductTypePage");
     }
 
-//---------------------------------------------------------------------------------------------------------------------
-    @RequestMapping("/updateUserPage")
-    public @ModelAttribute("userContent")
-    ModelAndView user() {
-        List<UserEntity> userEntities = userRepository.findAll();
-        ModelAndView modelAndView = new ModelAndView("updateUser");
-        modelAndView.addObject("userRoles", roles);
-        modelAndView.addObject("users", userEntities);
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public ModelAndView updateUser(@ModelAttribute("userContent") UserContent userContent) throws IOException {
-        ModelAndView modelAndView;
-        try {
-            userRepository.saveAll(userContent.getUserEntityList());
-            modelAndView =  new ModelAndView("redirect:/updateUserPage");
-        } catch (Exception e) {
-            modelAndView =  new ModelAndView("updateUser");
-            modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
-        }
-        return modelAndView;
-    }
-//---------------------------------------------------------------------------------------------------------------------
-
-
+//    ================================================================================================================================================
 
 
     @RequestMapping("/createUserPage")
@@ -219,7 +194,7 @@ public class ProductController {
                                    @RequestParam String password
     ) {
         boolean flag = new Boolean(active);
-        UserEntity userEntity = new UserEntity(name, lastName, rolesMap.get(userRoles), flag, username, password);
+        UserEntity userEntity = new UserEntity(name, lastName, userRoles, flag, username, password);
 
         ModelAndView modelAndView = new ModelAndView("createUser");
         modelAndView.addObject("userRoles", roles);
@@ -232,8 +207,26 @@ public class ProductController {
         return modelAndView;
     }
 
+    @RequestMapping("/updateUserPage")
+    public @ModelAttribute("userContent")
+    ModelAndView user() {
+        List<UserEntity> userEntities = userRepository.findAll();
+        ModelAndView modelAndView = new ModelAndView("updateUser");
+        modelAndView.addObject("userRoles", roles);
+        modelAndView.addObject("users", userEntities);
+        return modelAndView;
+    }
 
-
-
-
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public ModelAndView updateUser(@ModelAttribute("userContent") UserContent userContent) throws IOException {
+        ModelAndView modelAndView;
+        try {
+            userRepository.saveAll(userContent.getUserList());
+            modelAndView =  new ModelAndView("redirect:/updateUserPage");
+        } catch (Exception e) {
+            modelAndView =  new ModelAndView("updateUser");
+            modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
+        }
+        return modelAndView;
+    }
 }
