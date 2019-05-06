@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class USerController {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;
