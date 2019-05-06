@@ -31,6 +31,7 @@ public class ProductController {
     private TypeProductsRepository typeProductsRepository;
 
     private final List<Role> roles = new ArrayList<>();
+    private List<UserEntity> userEntities = new ArrayList<>();
 
     {
         roles.add(new Role(0,"Ադմինիստրատոր"));
@@ -143,7 +144,7 @@ public class ProductController {
         model.addObject("productType", productTypeEntities);
         return model;
     }
-//    ================================================================================================================================================
+    //================================================================================================================================================
 
     @RequestMapping("/createProductTypePage")
     public ModelAndView createType() {
@@ -175,7 +176,7 @@ public class ProductController {
         return new ModelAndView("redirect:/updateProductTypePage");
     }
 
-//    ================================================================================================================================================
+//====================================================================================================================================================
 
 
     @RequestMapping("/createUserPage")
@@ -210,7 +211,7 @@ public class ProductController {
     @RequestMapping("/updateUserPage")
     public @ModelAttribute("userContent")
     ModelAndView user() {
-        List<UserEntity> userEntities = userRepository.findAll();
+        userEntities = userRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("updateUser");
         modelAndView.addObject("userRoles", roles);
         modelAndView.addObject("users", userEntities);
@@ -224,7 +225,10 @@ public class ProductController {
             userRepository.saveAll(userContent.getUserList());
             modelAndView =  new ModelAndView("redirect:/updateUserPage");
         } catch (Exception e) {
-            modelAndView =  new ModelAndView("updateUser");
+            userEntities = userRepository.findAll();
+            modelAndView = new ModelAndView("updateUser");
+            modelAndView.addObject("userRoles", roles);
+            modelAndView.addObject("users", userEntities);
             modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
         }
         return modelAndView;
