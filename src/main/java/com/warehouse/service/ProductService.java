@@ -70,4 +70,18 @@ public class ProductService {
 
         return jdbcTemplate.query(queryBldr.toString(), new ProductRowMapper());
     }
+
+    public void deleteProducts(ProductFilter filter) {
+
+        StringBuilder queryBldr = new StringBuilder(" DELETE FROM products WHERE product_code = ");
+
+        if (filter.getProductCode() != null && !filter.getProductCode().isEmpty()) {
+            queryBldr.append(filter.getProductCode());
+        }
+        if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
+            queryBldr.append("OR bar_code =").append(filter.getBarCode());
+        }
+
+        jdbcTemplate.execute(queryBldr.toString());
+    }
 }

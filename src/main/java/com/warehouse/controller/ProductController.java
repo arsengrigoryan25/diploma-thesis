@@ -99,7 +99,14 @@ public class ProductController {
 
     }
 
-
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
+    public ModelAndView deleteProductInWarehouse( @RequestParam String barcode
+    ) {
+        productService.deleteProducts(new ProductFilter("","",barcode,""));
+        infoRepository.save(new InfoEntity(new Date(), "Jnjvel e apranq, vori  shtrix code - " + barcode));
+        return new ModelAndView("redirect:/searchProduct");
+    }
+//    code -" + productCode + "
     @RequestMapping("/searchProductPage")
     public ModelAndView getPageSearchProduct() {
         List<ProductTypeEntity> productType = typeProductsRepository.findAll();

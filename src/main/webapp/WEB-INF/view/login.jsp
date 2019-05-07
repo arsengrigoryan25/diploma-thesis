@@ -19,7 +19,7 @@
             <td><input id="password" name="password" type="password" class="form-control"/></td>
         </tr>
         <tr class="form-wrap-inner form-group mt-4">
-            <td><input type="submit" value="Search" class="btn btn-primary"/></td>
+            <td><input type="submit" value="Login" class="btn btn-primary"/></td>
         </tr>
     </table>
 </form:form>

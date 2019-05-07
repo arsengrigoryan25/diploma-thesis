@@ -86,8 +86,14 @@
                         <td class="current-bar-code">${product.barCode}</td>
 
                         <td class="w80 text-center">
-                            <button type="button" class="btn btn-info btn-lg open-modal" data-toggle="modal" data-target="#myModal">Open Modal
+                            <button type="button" class="btn btn-info btn-lg open-modal" data-toggle="modal" data-target="#myModal">
+                                Ավելացնել ապրանք
                             </button>
+                        </td>
+                        <td class="w80 text-center">
+                            <form method="POST" action="${pageContext.request.contextPath}/deleteProduct?barCode=${product.barCode}" class="display-inb">
+                                <button id="submit${loop.index}del" type="submit" style="display: none">Ջնջել ապրանք</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -134,8 +140,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary ajax">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary ajax">Ավելացնել</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Փակել</button>
                 </div>
             </div>
         </div>
