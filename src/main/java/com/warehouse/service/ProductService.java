@@ -58,7 +58,7 @@ public class ProductService {
         if (filter.getName() != null && !filter.getName().isEmpty()) {
             queryBldr.append(" AND upper(p.NAME) LIKE % ").append(filter.getName().toUpperCase()).append(" %");
         }
-        if (filter.getType() != null && !filter.getType().isEmpty()) {
+        if (filter.getType() != null && !filter.getType().isEmpty() && !filter.getType().equals("1")) {
             queryBldr.append(" AND p.product_type_id = ").append(filter.getType());
         }
         if (filter.getProductCode() != null && !filter.getProductCode().isEmpty()) {

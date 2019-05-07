@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private DataSource dataSource;
 
@@ -33,13 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("0, 1")
-                .antMatchers("/addProduct").hasAnyAuthority("0, 1")
-                .antMatchers("/createProduct").hasAnyAuthority("0, 1")
-                .antMatchers("/createProductType").hasAnyAuthority("0, 1")
-                .antMatchers("/createUser").hasAnyAuthority("0, 1")
-                .antMatchers("/searchProduct").hasAnyAuthority("0, 1")
-                .antMatchers("/updateProductType").hasAnyAuthority("0, 1")
+                .antMatchers("/createUser").hasAnyAuthority("0")
+                .antMatchers("/updateUser").hasAnyAuthority("0")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
