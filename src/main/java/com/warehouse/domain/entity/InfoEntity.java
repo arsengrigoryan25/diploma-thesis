@@ -17,7 +17,7 @@ import java.util.Date;
 public class InfoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
 	private Date changeDate;
