@@ -25,6 +25,8 @@ public class ProductController {
     @Autowired
     private TypeProductsRepository typeProductsRepository;
 
+    private static final String ONLY_DIGITAL = "^\\d+$";
+
     @RequestMapping("/createProductPage")
     public ModelAndView getPageCreateProduct() {
         List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
@@ -43,22 +45,27 @@ public class ProductController {
                                       @RequestParam String productCode,
                                       @RequestParam String barcode
 
-    ) {
-        ModelAndView modelAndView = new ModelAndView("createProduct");
-        ProductEntity entity = new ProductEntity(name, productType, description, new Integer(countInWarehouse), 0,
-                purchasePrice, salePrice, productCode, barcode);
+    ) { ModelAndView modelAndView = new ModelAndView("createProduct");
 
-        try {
-            productRepository.save(entity);
-            infoRepository.save(new InfoEntity(new Date(), "Stextsvel e apranq, anwun - " + name + "code -" + productCode + " shtrix code - " + barcode));
-        } catch (Exception e) {
-            List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
-            modelAndView.addObject("productType", typeProducts);
-            modelAndView.addObject("productEntity", entity);
-            modelAndView.addObject("error", "Այս տվյալներով ապրանք արդեն գրանցված է");
+        if(productCode.trim().matches(ONLY_DIGITAL) && barcode.trim().matches(ONLY_DIGITAL)){
+            ProductEntity entity = new ProductEntity(name, productType, description, new Integer(countInWarehouse), 0,
+                    purchasePrice, salePrice, productCode, barcode);
+            try {
+                productRepository.save(entity);
+                infoRepository.save(new InfoEntity(new Date(), productCode, barcode, "Stextsvel e apranq," + name ));
+            } catch (Exception e) {
+                List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
+                modelAndView.addObject("productType", typeProducts);
+                modelAndView.addObject("productEntity", entity);
+                modelAndView.addObject("error", "Այս տվյալներով ապրանք արդեն գրանցված է");
+                return modelAndView;
+            }
+            return new ModelAndView("redirect:createProductPage");
+        }
+        else{
+            modelAndView.addObject("error","ապրանքի կոդը կամ շտրիխ կոդը պետք ե լինի միայն թիվ");
             return modelAndView;
         }
-        return new ModelAndView("redirect:createProductPage");
     }
 
 

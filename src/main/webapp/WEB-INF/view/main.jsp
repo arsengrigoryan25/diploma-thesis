@@ -38,6 +38,9 @@
         <tr>
             <td><a href="/updateUserPage">Թարմացնել օգտատերի տվյալները</a></td>
         </tr>
+        <tr>
+            <td><a href="/searchHistoryPage">Ապրանքների պատմություն</a></td>
+        </tr>
         </tbody>
     </table>
 </div>

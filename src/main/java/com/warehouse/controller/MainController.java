@@ -1,5 +1,6 @@
 package com.warehouse.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.warehouse.domain.dto.DictionaryContent;
 import com.warehouse.domain.dto.Product;
 import com.warehouse.domain.dto.Role;
@@ -34,5 +35,23 @@ public class MainController {
     public String main() {
         return "main";
     }
+
+    @RequestMapping("/searchHistoryPage")
+    public ModelAndView searchHistoryPage( ) {
+        ModelAndView modelAndView = new ModelAndView("searchHistory");
+        return modelAndView;
+    }
+
+    @RequestMapping("/searchHistory")
+    public ModelAndView searchHistoryByDate(@RequestParam Date startDate,
+                                            @RequestParam Date endDate
+    ) {
+        ModelAndView modelAndView = new ModelAndView("searchHistory");
+
+
+        return modelAndView;
+    }
+
+
 
 }

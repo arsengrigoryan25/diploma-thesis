@@ -21,10 +21,19 @@ public class InfoEntity {
 	@Column(name = "ID")
 	private Integer id;
 	private Date changeDate;
+	private String productCode;
+	private String barCode;
 	private String info;
 
 	public InfoEntity(Date changeDate, String info) {
 		this.changeDate = changeDate;
+		this.info = info;
+	}
+
+	public InfoEntity(Date changeDate,  String productCode, String barCode, String info) {
+		this.changeDate = changeDate;
+		this.barCode = barCode;
+		this.productCode = productCode;
 		this.info = info;
 	}
 }
