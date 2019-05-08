@@ -73,13 +73,14 @@ public class ProductService {
 
     public void deleteProducts(ProductFilter filter) {
 
-        StringBuilder queryBldr = new StringBuilder(" DELETE FROM products WHERE product_code = ");
+        StringBuilder queryBldr = new StringBuilder(" DELETE FROM products WHERE bar_code = ");
 
-        if (filter.getProductCode() != null && !filter.getProductCode().isEmpty()) {
-            queryBldr.append(filter.getProductCode());
-        }
+
         if (filter.getBarCode() != null && !filter.getBarCode().isEmpty()) {
-            queryBldr.append("OR bar_code =").append(filter.getBarCode());
+            queryBldr.append(filter.getBarCode());
+        }
+        if (filter.getProductCode() != null && !filter.getProductCode().isEmpty()) {
+            queryBldr.append("OR product_code =").append(filter.getProductCode());
         }
 
         jdbcTemplate.execute(queryBldr.toString());

@@ -61,6 +61,7 @@ public class ProductController {
         return new ModelAndView("redirect:createProductPage");
     }
 
+
     @RequestMapping("/addProductPage")
     public ModelAndView getPageAddProduct() {
         return new ModelAndView("addProduct");
@@ -99,14 +100,7 @@ public class ProductController {
 
     }
 
-    @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
-    public ModelAndView deleteProductInWarehouse( @RequestParam String barcode
-    ) {
-        productService.deleteProducts(new ProductFilter("","",barcode,""));
-        infoRepository.save(new InfoEntity(new Date(), "Jnjvel e apranq, vori  shtrix code - " + barcode));
-        return new ModelAndView("redirect:/searchProduct");
-    }
-//    code -" + productCode + "
+
     @RequestMapping("/searchProductPage")
     public ModelAndView getPageSearchProduct() {
         List<ProductTypeEntity> productType = typeProductsRepository.findAll();
@@ -116,10 +110,10 @@ public class ProductController {
     }
 
     @RequestMapping("/searchProduct")
-    public ModelAndView searchProduct(@RequestParam String name,
-                                      @RequestParam String productType,
-                                      @RequestParam String productCode,
-                                      @RequestParam String barcode
+    public ModelAndView searchProduct(@RequestParam(value="name", defaultValue = "") String name,
+                                      @RequestParam(value="productType", defaultValue = "1") String productType,
+                                      @RequestParam(value="productCode", defaultValue = "") String productCode,
+                                      @RequestParam(value="barcode", defaultValue = "") String barcode
     ) {
         Product filterValue = new Product(name, productType, productCode, barcode);
         List<Product> productList = productService.searchProducts(new ProductFilter(name, productType, productCode, barcode));
@@ -130,5 +124,14 @@ public class ProductController {
         model.addObject("productList", productList);
         model.addObject("productType", productTypeEntities);
         return model;
+    }
+
+
+    @RequestMapping("/deleteProduct/{code}")
+    public ModelAndView deleteProductInWarehouse( @PathVariable(name = "code") String barcode//    code -" + productCode + "
+    ) {
+        productService.deleteProducts(new ProductFilter("","","",barcode));
+        infoRepository.save(new InfoEntity(new Date(), "Jnjvel e apranq, vori  shtrix code - " + barcode));
+        return new ModelAndView("redirect:/searchProduct");
     }
 }

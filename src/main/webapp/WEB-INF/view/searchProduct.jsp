@@ -69,6 +69,7 @@
                     <th> Ապրանքի կոդը</th>
                     <th> Շտրիխ կոդ</th>
                     <th> Գործողություն</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -90,10 +91,10 @@
                                 Ավելացնել ապրանք
                             </button>
                         </td>
-                        <td class="w80 text-center">
-                            <form method="POST" action="${pageContext.request.contextPath}/deleteProduct?barCode=${product.barCode}" class="display-inb">
-                                <button id="submit${loop.index}del" type="submit" style="display: none">Ջնջել ապրանք</button>
-                            </form>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/deleteProduct/${product.barCode}"
+                               onclick="return confirm('Դուք ուզում եք ջնջել տվյալ ապրանքը');"
+                               class="btn btn-info btn-lg">Ջնջել ապրանք</a>
                         </td>
                     </tr>
                 </c:forEach>
