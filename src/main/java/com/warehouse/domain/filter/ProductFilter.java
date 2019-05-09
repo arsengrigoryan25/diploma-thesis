@@ -14,7 +14,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProductFilter{
+public class ProductFilter implements Serializable{
+    private static final long serialVersionUID = 1048334372865360593L;
 
     private String name;
     private String type;

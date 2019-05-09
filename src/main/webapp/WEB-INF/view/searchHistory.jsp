@@ -23,6 +23,7 @@
     <link href="./css/base.css" rel="stylesheet">
     <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css"
           rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,57 +43,87 @@
 <form:form action="${pageContext.request.contextPath}/searchHistory">
     <div class="doc-list">
         <a href="/">Գլխավոր էջ</a>
-        <table class="negrTable table borderless">
-            <thead>
-            <tr>
-                <td>
-                    <label class="w80">Որոնման միջակայքը</label>
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <div class="container">
-                        <div class="row">
-                            <div class='col-sm-6'>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" name="from"/>
-                                        <span class="input-group-addon">
+
+        <div class="container">
+            <div class="row negrTable table borderless">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Ապրանքի շտրիխ կոդ</label>
+                        <input type='text' class="form-control" name="barCode"/>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" name="startDate"/>
+                            <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </td>
-                <td>
-                    <div class="container">
-                        <div class="row">
-                            <div class='col-sm-6'>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepicker2'>
-                                        <input type='text' class="form-control" name="to"/>
-                                        <span class="input-group-addon">
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            <label>մինչև</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input type='text' class="form-control" name="endDate"/>
+                            <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="form-wrap-inner clearfix">
-            <div class="form-group mt-4">
-                <input type="submit" value="Փնտրել" class="btn btn-primary">
+                </div>
             </div>
+            <div class="form-wrap-inner clearfix">
+                <div class="form-group mt-4">
+                    <input type="submit" value="Փնտրել" class="btn btn-primary">
+                </div>
+            </div>
+            <label>${error}</label>
         </div>
-        <label>${error}</label>
+        <div class="container-fluid">
+            <table class="negrTable" style="overflow: auto;    margin: 0 auto;">
+                <thead>
+                <tr>
+                    <th>Հ/Հ</th>
+                    <th>Անուն</th>
+                    <th>Շտրիխ կոդ</th>
+                    <th>Ապրանքի կոդ</th>
+                    <th>Ամսաթիվ</th>
+                    <th>Ավելացվել է</th>
+                    <th>Փոփոխությունը պահեստում</th>
+                    <th>Փոփոխությունը խանութում</th>
+                    <th>Վաճառված ապրանքը</th>
+                    <th>Քանակ</th>
+                    <th>Գործողության նկարագրում</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${searchInfo}" var="info">
+                    <tr>
+                        <td>${info.id}</td>
+                        <td>${info.name}</td>
+                        <td>${info.barcode}</td>
+                        <td>${info.productCode}</td>
+                        <td>${info.changeDate}</td>
+                        <td>${info.incrementOrDecrement}</td>
+                        <td>${info.addProductInWarehouse}</td>
+                        <td>${info.addProductInShop}</td>
+                        <td>${info.sell}</td>
+                        <td>${info.count}</td>
+                        <td>${info.info}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
 
         <table class="negrTable table borderless">
             <thead>

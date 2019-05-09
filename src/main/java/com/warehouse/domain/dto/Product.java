@@ -22,23 +22,19 @@ public class Product implements Serializable {
 	private String name;
 	private String productTypeId;
 	private String description;
-	private Integer countInWarehouse;
-	private Integer countInShop;
 	private String purchasePrice;
 	private String salePrice;
 	private String productCode;
 	private String barCode;
 
-	public Product(Integer countInWarehouse, Integer countInShop, String productCode, String barCode) {
-		this.countInWarehouse = countInWarehouse;
-		this.countInShop = countInShop;
+	public Product(String name, String productTypeId, String productCode, String barCode) {
+		this.name = name;
+		this.productTypeId = productTypeId;
 		this.productCode = productCode;
 		this.barCode = barCode;
 	}
 
-	public Product(String name, String productTypeId, String productCode, String barCode) {
-		this.name = name;
-		this.productTypeId = productTypeId;
+	public Product(String productCode, String barCode) {
 		this.productCode = productCode;
 		this.barCode = barCode;
 	}

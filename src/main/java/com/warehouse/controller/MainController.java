@@ -10,6 +10,7 @@ import com.warehouse.domain.entity.ProductEntity;
 import com.warehouse.domain.entity.ProductTypeEntity;
 import com.warehouse.domain.entity.UserEntity;
 import com.warehouse.domain.filter.ProductFilter;
+import com.warehouse.domain.filter.ProductInfoFilter;
 import com.warehouse.repository.InfoRepository;
 import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.TypeProductsRepository;
@@ -31,6 +32,9 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping("/")
     public String main() {
         return "main";
@@ -43,11 +47,13 @@ public class MainController {
     }
 
     @RequestMapping("/searchHistory")
-    public ModelAndView searchHistoryByDate(@RequestParam Date startDate,
+    public ModelAndView searchHistoryByDate(@RequestParam String barCode,
+                                            @RequestParam Date startDate,
                                             @RequestParam Date endDate
+
     ) {
         ModelAndView modelAndView = new ModelAndView("searchHistory");
-
+        productService.getProductInfo(new ProductInfoFilter(barCode,startDate,endDate));
 
         return modelAndView;
     }

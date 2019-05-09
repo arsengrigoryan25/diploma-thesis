@@ -18,23 +18,20 @@ public class ProductEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
+	@Column(unique = true)
+	private String barCode;
 	private String name;
 	private String productTypeId;
 	private String description;
-	private Integer countInWarehouse;
-	private Integer countInShop;
 	private String purchasePrice;
 	private String salePrice;
 	private String productCode;
-	@Column(unique = true)
-	private String barCode;
 
-	public ProductEntity(String name, String productTypeId, String description, Integer countInWarehouse, Integer countInShop, String purchasePrice, String salePrice, String productCode, String barCode) {
+
+	public ProductEntity(String name, String productTypeId, String description, String purchasePrice, String salePrice, String productCode, String barCode) {
 		this.name = name;
 		this.productTypeId = productTypeId;
 		this.description = description;
-		this.countInWarehouse = countInWarehouse;
-		this.countInShop = countInShop;
 		this.purchasePrice = purchasePrice;
 		this.salePrice = salePrice;
 		this.productCode = productCode;

@@ -5,6 +5,7 @@ import com.warehouse.domain.entity.*;
 import com.warehouse.domain.filter.ProductFilter;
 import com.warehouse.repository.InfoRepository;
 import com.warehouse.repository.ProductRepository;
+import com.warehouse.repository.QuantityOfProductRepository;
 import com.warehouse.repository.TypeProductsRepository;
 import com.warehouse.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,10 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private TypeProductsRepository typeProductsRepository;
+    @Autowired
+    private QuantityOfProductRepository quantityOfProductRepository;
 
-    private static final String ONLY_DIGITAL = "^\\d+$";
+    private static final String DIGITAL_PATTERN = "^\\d{0,13}$";
 
     @RequestMapping("/createProductPage")
     public ModelAndView getPageCreateProduct() {
@@ -47,11 +50,12 @@ public class ProductController {
 
     ) { ModelAndView modelAndView = new ModelAndView("createProduct");
 
-        if(productCode.trim().matches(ONLY_DIGITAL) && barcode.trim().matches(ONLY_DIGITAL)){
-            ProductEntity entity = new ProductEntity(name, productType, description, new Integer(countInWarehouse), 0,
-                    purchasePrice, salePrice, productCode, barcode);
+        if(productCode.trim().matches(DIGITAL_PATTERN) && productCode.trim().isEmpty() && barcode.trim().matches(DIGITAL_PATTERN)){
+            ProductEntity entity = new ProductEntity(name, productType, description, purchasePrice, salePrice, productCode, barcode);
+            QuantityOfProductEntity productEntity = new QuantityOfProductEntity(barcode,new Integer(countInWarehouse),0,0);
             try {
                 productRepository.save(entity);
+                quantityOfProductRepository.save(productEntity);
                 infoRepository.save(new InfoEntity(new Date(), productCode, barcode, "Stextsvel e apranq," + name ));
             } catch (Exception e) {
                 List<ProductTypeEntity> typeProducts = typeProductsRepository.findAll();
@@ -80,31 +84,45 @@ public class ProductController {
                                               @RequestParam String barcode,
                                               @RequestParam String addProductStatus
     ) {
-        //TODO check product count in warehouse
-
-        final String digitPattern = "^\\d{0,13}|[ ]$";
-        Product product;
         ModelAndView modelAndView = new ModelAndView("searchProduct");
-        if (count.trim().matches(digitPattern) && productCode.trim().matches(digitPattern) && barcode.trim().matches(digitPattern)) {
+        Integer countInWarehouse;
+        Integer countInShop;
+        Integer countProduct;
+
+        if (count.trim().matches(DIGITAL_PATTERN) && productCode.trim().matches(DIGITAL_PATTERN) && productCode.trim().isEmpty() && barcode.trim().matches(DIGITAL_PATTERN)) {
+            countProduct = new Integer(count);
+            countInWarehouse = productService.getCountProductInWarehouseByBarcode(barcode);
+
             if (new Boolean(addProductStatus)) {
-                product = new Product(new Integer(count), 0, productCode, barcode);
-                productService.updateProductsInWarehouse(product);
-                infoRepository.save(new InfoEntity(new Date(), "Avelacvel e " + count + "hat apranq pahestum, code -" + productCode + " shtrix code - " + barcode));
+                productService.updateProductsInWarehouse(new ProductView(productCode, barcode,countProduct, 0, 0));
+
+                infoRepository.save(new InfoEntity(new Date(), barcode, true, countProduct, 0, 0, countInWarehouse,
+                        "Avelacvel e " + count + "hat apranq pahestum, apranqicode -" + productCode + " shtrixcode - " + barcode));
 
                 modelAndView.addObject("error", "Ապրանքը ավելացված է");
             } else {
-                product = new Product(new Integer(count), new Integer(count), productCode, barcode);
-                productService.updateProductsInShop(product);
-                infoRepository.save(new InfoEntity(new Date(), "Avelacvel e " + count + "hat apranq xanutum, code -" + productCode + " shtrix code - " + barcode));
+                countInShop = productService.getCountProductInShopByBarcode(barcode);
 
-                modelAndView.addObject("error", "Ապրանքը ավելացված է");
+                if (countInWarehouse > countProduct) {
+                    productService.updateProductsInShop(new ProductView(productCode, barcode, 0, countProduct,0 ));
+
+                    infoRepository.save(new InfoEntity(new Date(), barcode, true, 0, countProduct, 0, countInShop,
+                            "Avelacvel e " + count + "hat apranq xanutum, apranqicode -" + productCode + " shtrixcode - " + barcode));
+                    infoRepository.save(new InfoEntity(new Date(), barcode, false, countProduct, 0, 0, countInWarehouse,
+                            "Hanvel e " + count + "hat apranq pahestic, apranqicode -" + productCode + " shtrixcode - " + barcode));
+
+                    modelAndView.addObject("error", "Ապրանքը ավելացված է");
+                }else{
+                    modelAndView.addObject("error", "Պահեստում չկա այդքան ապրանք");
+                }
             }
+
             return modelAndView;
         } else {
-            modelAndView.addObject("error", "Դաշտերը պետքե լինեն թվերր");
+            modelAndView.addObject("error", "Դաշտերը պետք է լինեն թվերր");
+
             return modelAndView;
         }
-
     }
 
 
