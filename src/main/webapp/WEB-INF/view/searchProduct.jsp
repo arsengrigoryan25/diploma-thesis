@@ -21,7 +21,7 @@
         <table class="negrTable">
             <tbody>
             <tr>
-                <td><label> Ապրանքի անուն</label></td>
+                <td><label>Ապրանքի անուն</label></td>
                 <td><input id="nameId" name="name" type="text" class="form-control" value="${filterValue.name}"/></td>
             </tr>
             <tr>
@@ -43,7 +43,7 @@
             </tr>
             <tr>
                 <td><label>Շտրիխ կոդ</label></td>
-                <td><input id="barCodeId" name="barcode" type="text" class="form-control" value="${filterValue.barCode}"/></td>
+                <td><input id="barcodeId" name="barcode" type="text" class="form-control" value="${filterValue.barcode}"/></td>
             </tr>
             </tbody>
             <label>${error}</label>
@@ -73,7 +73,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${productList}" var="product" varStatus="loop">
+                <c:forEach items="${productDTOList}" var="product" varStatus="loop">
                     <tr>
                         <td>${product.id}</td>
                         <td>${product.name}</td>
@@ -84,7 +84,7 @@
                         <td>${product.purchasePrice}</td>
                         <td>${product.salePrice}</td>
                         <td class="current-product-code">${product.productCode}</td>
-                        <td class="current-bar-code">${product.barCode}</td>
+                        <td class="current-bar-code">${product.barcode}</td>
 
                         <td class="w80 text-center">
                             <button type="button" class="btn btn-info btn-lg open-modal" data-toggle="modal" data-target="#myModal">
@@ -92,7 +92,7 @@
                             </button>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/deleteProduct/${product.barCode}"
+                            <a href="${pageContext.request.contextPath}/deleteProduct/${product.barcode}"
                                onclick="return confirm('Դուք ուզում եք ջնջել տվյալ ապրանքը');"
                                class="btn btn-info btn-lg">Ջնջել ապրանք</a>
                         </td>

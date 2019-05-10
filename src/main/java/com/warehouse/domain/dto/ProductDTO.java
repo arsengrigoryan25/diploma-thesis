@@ -15,9 +15,9 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Product implements Serializable {
-
+public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 5776458177054327256L;
+
 	private Integer id;
 	private String name;
 	private String productTypeId;
@@ -25,17 +25,17 @@ public class Product implements Serializable {
 	private String purchasePrice;
 	private String salePrice;
 	private String productCode;
-	private String barCode;
+	private String barcode;
 
-	public Product(String name, String productTypeId, String productCode, String barCode) {
+	public ProductDTO(String name, String productTypeId, String productCode, String barcode) {
 		this.name = name;
 		this.productTypeId = productTypeId;
 		this.productCode = productCode;
-		this.barCode = barCode;
+		this.barcode = barcode;
 	}
 
-	public Product(String productCode, String barCode) {
+	public ProductDTO(String productCode, String barcode) {
 		this.productCode = productCode;
-		this.barCode = barCode;
+		this.barcode = barcode;
 	}
 }

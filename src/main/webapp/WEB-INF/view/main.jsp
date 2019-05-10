@@ -21,10 +21,13 @@
     <table class="negrTable">
         <tbody>
         <tr>
+            <td><a href="/sellProductPage">Վաճառել ապրանք</a></td>
+        </tr>
+        <tr>
             <td><a href="/createProductPage">Ստեղծել ապրանք</a></td>
         </tr>
         <tr>
-            <td><a href="/searchProductPage">Փնտրել ապրանք</a></td>
+            <td><a href="/searchOrAddProductPage">Փնտրել կամ ավելացնել ապրանք</a></td>
         </tr>
         <tr>
             <td><a href="/createProductTypePage">Ավելացնել ապրանքի տեսակ</a></td>

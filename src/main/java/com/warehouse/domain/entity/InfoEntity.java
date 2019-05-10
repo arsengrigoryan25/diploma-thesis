@@ -20,8 +20,7 @@ public class InfoEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
-	@Column(unique = true)
-	private String barCode;
+	private String barcode;
 	private String productCode;
 	private Date changeDate;
 	private Boolean incrementOrDecrement;		// Եթե ավելացվում է true, եթե պակասեցվում է false
@@ -36,16 +35,16 @@ public class InfoEntity {
 		this.info = info;
 	}
 
-	public InfoEntity(Date changeDate,  String productCode, String barCode, String info) {
+	public InfoEntity(Date changeDate,  String productCode, String barcode, String info) {
 		this.changeDate = changeDate;
-		this.barCode = barCode;
+		this.barcode = barcode;
 		this.productCode = productCode;
 		this.info = info;
 	}
 
-	public InfoEntity(Date changeDate, String barCode, Boolean incrementOrDecrement, Integer addProductInWarehouse, Integer addProductInShop, Integer sell, Integer count, String info) {
+	public InfoEntity(Date changeDate, String barcode, Boolean incrementOrDecrement, Integer addProductInWarehouse, Integer addProductInShop, Integer sell, Integer count, String info) {
 		this.changeDate = changeDate;
-		this.barCode = barCode;
+		this.barcode = barcode;
 		this.incrementOrDecrement = incrementOrDecrement;
 		this.addProductInWarehouse = addProductInWarehouse;
 		this.addProductInShop = addProductInShop;

@@ -6,9 +6,6 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:c="http://java.sun.com/jstl/core"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:f="http://java.sun.com/jsf/core"
 >
 <head>
     <meta charset="UTF-8">
@@ -40,51 +37,53 @@
 
 </head>
 <body>
+
 <form:form action="${pageContext.request.contextPath}/searchHistory">
     <div class="doc-list">
         <a href="/">Գլխավոր էջ</a>
-
         <div class="container">
-            <div class="row negrTable table borderless">
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <label>Ապրանքի շտրիխ կոդ</label>
-                        <input type='text' class="form-control" name="barCode"/>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" name="startDate"/>
-                            <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <div class='input-group date'>
-                            <label>մինչև</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker2'>
-                            <input type='text' class="form-control" name="endDate"/>
-                            <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="form-wrap-inner clearfix">
                 <div class="form-group mt-4">
                     <input type="submit" value="Փնտրել" class="btn btn-primary">
                 </div>
             </div>
+
+            <div class="container">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Ապրանքի շտրիխ կոդ</label>
+                        <input type='text' class="form-control" name="barcode"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker'>
+                                <input type='text' class="form-control" name="startDateString"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" name="endDateString"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <label>${error}</label>
         </div>
         <div class="container-fluid">
@@ -123,32 +122,115 @@
                 </tbody>
             </table>
         </div>
-
-
-        <table class="negrTable table borderless">
-            <thead>
-            <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>I</td>
-                <td>II</td>
-                <td>III</td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 </form:form>
 <script type="text/javascript">
+    // $(function () {
+    //     $('#datetimepicker1').datetimepicker();
+    // });
+    // $(function () {
+    //     $('#datetimepicker2').datetimepicker();
+    // });
+    // $(function() {
+    //     $('#datetimepicker4').datetimepicker({
+    //         pickTime: false
+    //     });
+    // });
+    // ---------------------------------------------------------------------------------
+    //     Date formats: yyyy-mm-dd, yyyymmdd, dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+
     $(function () {
-        $('#datetimepicker1').datetimepicker();
+        var bindDatePicker = function () {
+            $(".date").datetimepicker({
+                format: 'YYYY-MM-DD',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                }
+            }).find('input:first').on("blur", function () {
+                // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+                // update the format if it's yyyy-mm-dd
+                var date = parseDate($(this).val());
+
+                if (!isValidDate(date)) {
+                    //create date based on momentjs (we have that)
+                    date = moment().format('YYYY-MM-DD');
+                }
+
+                $(this).val(date);
+            });
+        }
+
+        var isValidDate = function (value, format) {
+            format = format || false;
+            // lets parse the date to the best of our knowledge
+            if (format) {
+                value = parseDate(value);
+            }
+
+            var timestamp = Date.parse(value);
+
+            return isNaN(timestamp) == false;
+        }
+
+        var parseDate = function (value) {
+            var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+            if (m)
+                value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+            return value;
+        }
+
+        bindDatePicker();
     });
+
     $(function () {
-        $('#datetimepicker2').datetimepicker();
+        var bindDatePicker1 = function () {
+            $(".date").datetimepicker({
+                format: 'dd-mm-yyyy',
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                }
+            }).find('input:first').on("blur", function () {
+                // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+                // update the format if it's yyyy-mm-dd
+                var date = parseDate($(this).val());
+
+                if (!isValidDate(date)) {
+                    //create date based on momentjs (we have that)
+                    date = moment().format('YYYY-MM-DD');
+                }
+
+                $(this).val(date);
+            });
+        }
+
+        var isValidDate = function (value, format) {
+            format = format || false;
+            // lets parse the date to the best of our knowledge
+            if (format) {
+                value = parseDate(value);
+            }
+
+            var timestamp = Date.parse(value);
+
+            return isNaN(timestamp) == false;
+        }
+
+        var parseDate = function (value) {
+            var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+            if (m)
+                value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+            return value;
+        }
+
+        bindDatePicker1();
     });
 </script>
 </body>

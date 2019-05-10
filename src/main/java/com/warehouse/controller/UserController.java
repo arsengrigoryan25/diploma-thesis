@@ -1,19 +1,9 @@
 package com.warehouse.controller;
 
-import com.warehouse.domain.dto.DictionaryContent;
-import com.warehouse.domain.dto.Product;
-import com.warehouse.domain.dto.Role;
-import com.warehouse.domain.dto.UserContent;
-import com.warehouse.domain.entity.InfoEntity;
-import com.warehouse.domain.entity.ProductEntity;
-import com.warehouse.domain.entity.ProductTypeEntity;
+import com.warehouse.domain.dto.RoleDTO;
+import com.warehouse.domain.UserContent;
 import com.warehouse.domain.entity.UserEntity;
-import com.warehouse.domain.filter.ProductFilter;
-import com.warehouse.repository.InfoRepository;
-import com.warehouse.repository.ProductRepository;
-import com.warehouse.repository.TypeProductsRepository;
 import com.warehouse.repository.UserRepository;
-import com.warehouse.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -33,18 +22,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    private final List<Role> roles = new ArrayList<>();
+    private final List<RoleDTO> roleDTOS = new ArrayList<>();
     private List<UserEntity> userEntities = new ArrayList<>();
 
     {
-        roles.add(new Role(0,"Ադմինիստրատոր"));
-        roles.add(new Role(1, "Օգտատեր"));
+        roleDTOS.add(new RoleDTO(0,"Ադմինիստրատոր"));
+        roleDTOS.add(new RoleDTO(1, "Օգտատեր"));
     }
 
     @RequestMapping("/createUserPage")
     public ModelAndView createUser() {
         ModelAndView modelAndView = new ModelAndView("createUser");
-        modelAndView.addObject("userRoles", roles);
+        modelAndView.addObject("userRoles", roleDTOS);
         return modelAndView;
     }
 
@@ -60,7 +49,7 @@ public class UserController {
         UserEntity userEntity = new UserEntity(name, lastName, userRoles, flag, username, password);
 
         ModelAndView modelAndView = new ModelAndView("createUser");
-        modelAndView.addObject("userRoles", roles);
+        modelAndView.addObject("userRoles", roleDTOS);
         try {
             userRepository.save(userEntity);
         } catch (Exception e) {
@@ -75,7 +64,7 @@ public class UserController {
     ModelAndView user() {
         userEntities = userRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("updateUser");
-        modelAndView.addObject("userRoles", roles);
+        modelAndView.addObject("userRoles", roleDTOS);
         modelAndView.addObject("users", userEntities);
         return modelAndView;
     }
@@ -89,7 +78,7 @@ public class UserController {
         } catch (Exception e) {
             userEntities = userRepository.findAll();
             modelAndView = new ModelAndView("updateUser");
-            modelAndView.addObject("userRoles", roles);
+            modelAndView.addObject("userRoles", roleDTOS);
             modelAndView.addObject("users", userEntities);
             modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
         }

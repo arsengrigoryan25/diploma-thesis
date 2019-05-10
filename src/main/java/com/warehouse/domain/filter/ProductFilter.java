@@ -20,5 +20,5 @@ public class ProductFilter implements Serializable{
     private String name;
     private String type;
     private String productCode;
-    private String barCode;
+    private String barcode;
 }

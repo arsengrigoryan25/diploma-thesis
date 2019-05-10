@@ -1,4 +1,4 @@
-package com.warehouse.domain.dto;
+package com.warehouse.domain;
 
 import com.warehouse.domain.entity.UserEntity;
 import lombok.AllArgsConstructor;

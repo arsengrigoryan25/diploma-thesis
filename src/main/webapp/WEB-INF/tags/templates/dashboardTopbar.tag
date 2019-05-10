@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <!--User photo-->
+    <!--UserDTO photo-->
     <div class="d-flex justify-content-end align-items-center right-menu pull-right w-50">
 
         <c:set var="paramList" value="" scope="request"/>

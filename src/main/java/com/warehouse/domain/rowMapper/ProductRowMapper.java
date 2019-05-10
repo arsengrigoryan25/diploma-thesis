@@ -1,19 +1,18 @@
 package com.warehouse.domain.rowMapper;
 
-import com.warehouse.domain.dto.Product;
-import com.warehouse.domain.dto.ProductView;
+import com.warehouse.domain.dto.ProductDTOView;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProductRowMapper implements RowMapper<ProductView> {
+public class ProductRowMapper implements RowMapper<ProductDTOView> {
     @Override
-    public ProductView mapRow(ResultSet resultSet, int i) throws SQLException {
-        ProductView productView = new ProductView();
+    public ProductDTOView mapRow(ResultSet resultSet, int i) throws SQLException {
+        ProductDTOView productView = new ProductDTOView();
         productView.setId(resultSet.getInt("id"));
         productView.setName(resultSet.getString("name"));
-        productView.setBarCode(resultSet.getString("bar_code"));
+        productView.setBarcode(resultSet.getString("barcode"));
         productView.setDescription(resultSet.getString("description"));
         productView.setProductCode(resultSet.getString("product_code"));
         productView.setPurchasePrice(resultSet.getString("purchase_price"));

@@ -20,13 +20,13 @@ public class QuantityOfProductEntity {
 	@Column(name = "ID")
 	private Integer id;
 	@Column(unique = true)
-	private String barCode;
+	private String barcode;
 	private Integer countInWarehouse;
 	private Integer countInShop;
 	private Integer countOfSell;
 
-	public QuantityOfProductEntity(String barCode, Integer countInWarehouse, Integer countInShop, Integer countOfSell) {
-		this.barCode = barCode;
+	public QuantityOfProductEntity(String barcode, Integer countInWarehouse, Integer countInShop, Integer countOfSell) {
+		this.barcode = barcode;
 		this.countInWarehouse = countInWarehouse;
 		this.countInShop = countInShop;
 		this.countOfSell = countOfSell;
