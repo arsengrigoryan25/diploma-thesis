@@ -30,8 +30,6 @@ public class MainController {
     @Autowired
     private InfoRepository infoRepository;
 
-    private static final String TIME_PATTERN = "";
-
     @RequestMapping("/")
     public String main() {
         return "main";
@@ -49,80 +47,8 @@ public class MainController {
                                             @RequestParam String endDateString
     ) {
         ModelAndView modelAndView = new ModelAndView("searchHistory");
+        List<InfoDTO> infoDTOList = productService.getProductInfo(new ProductInfoFilter(barcode, startDateString, endDateString));
 
-        Date startDate = null;
-        Date endDate = null;
-
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateAfterReg = null;
-        Date dateBeforeReg = null;
-
-
-
-        try {
-            if (!"".equals(startDateString)) {
-                dateAfterReg = format.parse(startDateString);
-            }
-            if (!"".equals(endDateString)) {
-                dateBeforeReg = format.parse(endDateString);
-            }
-
-//            if (!startDateString.trim().isEmpty()) {
-////                startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDateString);
-//
-//                Calendar mydate = new GregorianCalendar();
-//                Date thedate = null;
-//                try {
-//                    thedate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(startDateString);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                mydate.setTime(thedate);
-//
-//                int y = mydate.get(Calendar.YEAR);
-//                int mo = mydate.get(Calendar.MONTH);
-//                int dm = mydate.get(Calendar.DAY_OF_MONTH);
-//                int dw = mydate.get(Calendar.DAY_OF_WEEK);
-//                int h = mydate.get(Calendar.HOUR);
-//                int m = mydate.get(Calendar.MINUTE);
-//                int s = mydate.get(Calendar.SECOND);
-//                int mil = mydate.get(Calendar.MILLISECOND);
-//                int ap = mydate.get(Calendar.AM_PM);
-//                int hd = mydate.get(Calendar.HOUR_OF_DAY);
-//
-//                startDate = new Date(y,mo,dm);
-//            }
-//            if (!endDateString.trim().isEmpty()) {
-////                endDate = new SimpleDateFormat("YYYY-MM-DD").parse(endDateString);
-//
-//                Calendar mydate = new GregorianCalendar();
-//                Date thedate = null;
-//                try {
-//                    thedate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(endDateString);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                mydate.setTime(thedate);
-//
-//                int y = mydate.get(Calendar.YEAR);
-//                int mo = mydate.get(Calendar.MONTH);
-//                int dm = mydate.get(Calendar.DAY_OF_MONTH);
-//                int dw = mydate.get(Calendar.DAY_OF_WEEK);
-//                int h = mydate.get(Calendar.HOUR);
-//                int m = mydate.get(Calendar.MINUTE);
-//                int s = mydate.get(Calendar.SECOND);
-//                int mil = mydate.get(Calendar.MILLISECOND);
-//                int ap = mydate.get(Calendar.AM_PM);
-//                int hd = mydate.get(Calendar.HOUR_OF_DAY);
-//
-//                endDate = new Date(y,mo,dm);
-//            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-            modelAndView.addObject("error", "Արժեքները սխալ է լրացված");
-            return modelAndView;
-        }
-        List<InfoDTO> infoDTOList = productService.getProductInfo(new ProductInfoFilter(barcode, startDate, endDate));
         modelAndView.addObject("searchInfo", infoDTOList);
         return modelAndView;
     }
@@ -180,11 +106,69 @@ public class MainController {
 }
 
 
+/*
 
+ try {
+         if (!"".equals(startDateString)) {
+         format.parse(startDateString);
+         }
+         if (!"".equals(endDateString)) {
+         format.parse(endDateString);
+         }
+//            if (!startDateString.trim().isEmpty()) {
+////                startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDateString);
+//
+//                Calendar mydate = new GregorianCalendar();
+//                Date thedate = null;
+//                try {
+//                    thedate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(startDateString);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                mydate.setTime(thedate);
+//
+//                int y = mydate.get(Calendar.YEAR);
+//                int mo = mydate.get(Calendar.MONTH);
+//                int dm = mydate.get(Calendar.DAY_OF_MONTH);
+//                int dw = mydate.get(Calendar.DAY_OF_WEEK);
+//                int h = mydate.get(Calendar.HOUR);
+//                int m = mydate.get(Calendar.MINUTE);
+//                int s = mydate.get(Calendar.SECOND);
+//                int mil = mydate.get(Calendar.MILLISECOND);
+//                int ap = mydate.get(Calendar.AM_PM);
+//                int hd = mydate.get(Calendar.HOUR_OF_DAY);
+//
+//                startDate = new Date(y,mo,dm);
+//            }
+//            if (!endDateString.trim().isEmpty()) {
+////                endDate = new SimpleDateFormat("YYYY-MM-DD").parse(endDateString);
+//
+//                Calendar mydate = new GregorianCalendar();
+//                Date thedate = null;
+//                try {
+//                    thedate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(endDateString);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                mydate.setTime(thedate);
+//
+//                int y = mydate.get(Calendar.YEAR);
+//                int mo = mydate.get(Calendar.MONTH);
+//                int dm = mydate.get(Calendar.DAY_OF_MONTH);
+//                int dw = mydate.get(Calendar.DAY_OF_WEEK);
+//                int h = mydate.get(Calendar.HOUR);
+//                int m = mydate.get(Calendar.MINUTE);
+//                int s = mydate.get(Calendar.SECOND);
+//                int mil = mydate.get(Calendar.MILLISECOND);
+//                int ap = mydate.get(Calendar.AM_PM);
+//                int hd = mydate.get(Calendar.HOUR_OF_DAY);
+//
+//                endDate = new Date(y,mo,dm);
+//            }
+         } catch (ParseException e) {
+         e.printStackTrace();
 
-
-
-
+*/
 
 
 

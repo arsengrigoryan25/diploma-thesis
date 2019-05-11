@@ -16,6 +16,6 @@ public class ProductInfoFilter implements Serializable {
     private static final long serialVersionUID = 6653040569274078624L;
 
     private String barcode;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
 }

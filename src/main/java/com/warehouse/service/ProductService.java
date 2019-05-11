@@ -159,11 +159,11 @@ public class ProductService {
         }
 
         if (filter.getStartDate() != null) {
-            queryBldr.append(" AND i.change_date >= " + filter.getStartDate());
+            queryBldr.append(" AND i.change_date >= '" + filter.getStartDate() + " ' ");
         }
 
         if (filter.getEndDate() != null) {
-            queryBldr.append(" AND i.change_date <= " + filter.getEndDate());
+            queryBldr.append(" AND i.change_date <= '" + filter.getEndDate() + " ' ");
         }
 
         return jdbcTemplate.query(queryBldr.toString(), new ProductInfoRowMapper());

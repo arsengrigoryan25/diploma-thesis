@@ -14,8 +14,7 @@ INSERT INTO users (last_name, name, role, active, username, password)
 VALUES ('arsen', 'grigoryan', '0', true, 'ars', 'ars'),
        ('arman', 'grigoryan', '1', true, 'arm', 'arm');
 
-INSERT INTO products (name, product_type_id, description, purchase_price, sale_price,
-                      product_code, barcode)
+INSERT INTO products (name, product_type_id, description, purchase_price, sale_price, product_code, barcode)
 VALUES ('spichka', '9', 'haykakan lucki', '100', '110', '12345678', '87654321'),
        ('cello', '3', 'sev grich', '120', '130', '23456789', '98765432');
 
@@ -49,6 +48,7 @@ SELECT *
 FROM info;
 SELECT *
 FROM quantity_of_product;
+
 
 # ====================================================================================================================================================
 #   DELETE
