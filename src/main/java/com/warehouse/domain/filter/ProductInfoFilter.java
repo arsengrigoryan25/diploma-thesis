@@ -18,4 +18,5 @@ public class ProductInfoFilter implements Serializable {
     private String barcode;
     private String startDate;
     private String endDate;
+    private String productState;
 }

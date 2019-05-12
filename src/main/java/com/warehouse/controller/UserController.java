@@ -1,6 +1,6 @@
 package com.warehouse.controller;
 
-import com.warehouse.domain.dto.RoleDTO;
+import com.warehouse.domain.Role;
 import com.warehouse.domain.UserContent;
 import com.warehouse.domain.entity.UserEntity;
 import com.warehouse.repository.UserRepository;
@@ -22,18 +22,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    private final List<RoleDTO> roleDTOS = new ArrayList<>();
+    private final List<Role> roles = new ArrayList<>();
     private List<UserEntity> userEntities = new ArrayList<>();
 
     {
-        roleDTOS.add(new RoleDTO(0,"Ադմինիստրատոր"));
-        roleDTOS.add(new RoleDTO(1, "Օգտատեր"));
+        roles.add(new Role(0,"Ադմինիստրատոր"));
+        roles.add(new Role(1, "Օգտատեր"));
     }
 
     @RequestMapping("/createUserPage")
     public ModelAndView createUser() {
         ModelAndView modelAndView = new ModelAndView("createUser");
-        modelAndView.addObject("userRoles", roleDTOS);
+        modelAndView.addObject("userRoles", roles);
         return modelAndView;
     }
 
@@ -49,7 +49,7 @@ public class UserController {
         UserEntity userEntity = new UserEntity(name, lastName, userRoles, flag, username, password);
 
         ModelAndView modelAndView = new ModelAndView("createUser");
-        modelAndView.addObject("userRoles", roleDTOS);
+        modelAndView.addObject("userRoles", roles);
         try {
             userRepository.save(userEntity);
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class UserController {
     ModelAndView user() {
         userEntities = userRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("updateUser");
-        modelAndView.addObject("userRoles", roleDTOS);
+        modelAndView.addObject("userRoles", roles);
         modelAndView.addObject("users", userEntities);
         return modelAndView;
     }
@@ -78,7 +78,7 @@ public class UserController {
         } catch (Exception e) {
             userEntities = userRepository.findAll();
             modelAndView = new ModelAndView("updateUser");
-            modelAndView.addObject("userRoles", roleDTOS);
+            modelAndView.addObject("userRoles", roles);
             modelAndView.addObject("users", userEntities);
             modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
         }

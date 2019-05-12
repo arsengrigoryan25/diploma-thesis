@@ -1,4 +1,4 @@
-package com.warehouse.domain.dto;
+package com.warehouse.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RoleDTO implements Serializable {
+public class Role implements Serializable {
 	private static final long serialVersionUID = -6412027552683821947L;
 
 	private int id;

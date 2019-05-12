@@ -1,7 +1,7 @@
 package com.warehouse.service;
 
+
 import com.warehouse.domain.dto.InfoDTO;
-import com.warehouse.domain.dto.ProductDTO;
 import com.warehouse.domain.dto.ProductDTOView;
 import com.warehouse.domain.filter.ProductFilter;
 import com.warehouse.domain.filter.ProductInfoFilter;
@@ -158,13 +158,26 @@ public class ProductService {
             queryBldr.append(" AND p.barcode = " + filter.getBarcode());
         }
 
-        if (filter.getStartDate() != null) {
+        if (!filter.getStartDate().isEmpty()) {
             queryBldr.append(" AND i.change_date >= '" + filter.getStartDate() + " ' ");
         }
 
-        if (filter.getEndDate() != null) {
+        if (!filter.getEndDate().isEmpty()) {
             queryBldr.append(" AND i.change_date <= '" + filter.getEndDate() + " ' ");
         }
+
+        switch (filter.getProductState()) {
+            case "1":
+                queryBldr.append(" AND i.add_product_in_warehouse != 0 ");
+                break;
+            case "2":
+                queryBldr.append(" AND i.add_product_in_shop != 0 ");
+                break;
+            case "3":
+                queryBldr.append(" AND i.sell != 0 ");
+                break;
+        }
+
 
         return jdbcTemplate.query(queryBldr.toString(), new ProductInfoRowMapper());
     }

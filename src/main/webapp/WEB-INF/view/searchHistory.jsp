@@ -43,44 +43,57 @@
         <a href="/">Գլխավոր էջ</a>
         <div class="container">
 
-            <div class="form-wrap-inner clearfix">
-                <div class="form-group mt-4">
-                    <input type="submit" value="Փնտրել" class="btn btn-primary">
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label>Ապրանքի շտրիխ կոդ</label>
+                    <input type='text' class="form-control" name="barcode" value="${filterValue.barcode}"/>
                 </div>
             </div>
 
-            <div class="container">
-                <div class="col-xs-3">
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <label>Ապրանքի կարգավիճակը</label>
+                    <select id="productTypeId" name="productState" class="form-control">
+                        <c:forEach items="${productState}" var="state">
+                            <option value="${state.id}"
+                            <c:if test="${filterValue.productState eq state.id}"> selected="selected" </c:if>>
+                                ${state.name}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class='col-sm-3'>
                     <div class="form-group">
-                        <label>Ապրանքի շտրիխ կոդ</label>
-                        <input type='text' class="form-control" name="barcode"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class='col-sm-3'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker'>
-                                <input type='text' class="form-control" name="startDateString"/>
-                                <span class="input-group-addon">
+                        <div class='input-group date' id='datetimepicker'>
+                            <input type='text' class="form-control" name="startDate" value="${filterValue.startDate}"/>
+                            <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row">
-                    <div class='col-sm-3'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="endDateString"/>
-                                <span class="input-group-addon">
+            <div class="row">
+                <div class='col-sm-3'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" name="endDate" value="${filterValue.endDate}"/>
+                            <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
-                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+
+            <div class="form-wrap-inner clearfix">
+                <div class="form-group mt-4">
+                    <input type="submit" value="Փնտրել" class="btn btn-primary">
                 </div>
             </div>
 
