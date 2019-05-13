@@ -80,7 +80,7 @@ public class UserController {
             modelAndView = new ModelAndView("updateUser");
             modelAndView.addObject("userRoles", roles);
             modelAndView.addObject("users", userEntities);
-            modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գախտնաբառը չի կարող կրկնվել");
+            modelAndView.addObject("error", "Հ/Հ, օգտատերի անունը և գաղտնաբառը չի կարող կրկնվել");
         }
         return modelAndView;
     }

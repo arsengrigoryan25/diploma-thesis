@@ -42,27 +42,32 @@
     <div class="doc-list">
         <a href="/">Գլխավոր էջ</a>
         <div class="container">
-
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <label>Ապրանքի շտրիխ կոդ</label>
-                    <input type='text' class="form-control" name="barcode" value="${filterValue.barcode}"/>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Ապրանքի շտրիխ կոդ</label>
+                        <input type='text' class="form-control" name="barcode" value="${filterValue.barcode}"/>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <label>Ապրանքի կարգավիճակը</label>
-                    <select id="productTypeId" name="productState" class="form-control">
-                        <c:forEach items="${productState}" var="state">
-                            <option value="${state.id}"
-                            <c:if test="${filterValue.productState eq state.id}"> selected="selected" </c:if>>
-                                ${state.name}
-                            </option>
-                        </c:forEach>
-                    </select>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <label>Ապրանքի կարգավիճակը</label>
+                        <select id="productTypeId" name="productState" class="form-control">
+                            <c:forEach items="${productState}" var="state">
+                                <option value="${state.id}"
+                                <c:if test="${filterValue.productState eq state.id}"> selected="selected" </c:if>>
+                                    ${state.name}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="container">
 
             <div class="row">
                 <div class='col-sm-3'>
