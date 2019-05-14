@@ -21,6 +21,7 @@
         <div class="row">
             <div class="col-xs-offset-3 col-xs-6">
                 <div class="doc-list">
+                    <h2>Փնտրել կամ ավելացնել ապրանք</h2>
                     <a href="/">Գլխավոր էջ</a>
                     <hr>
                     <div class="negrTable">
@@ -117,7 +118,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h2>Ավելացնել ապրանք</h2>
                 </div>
                 <div class="modal-body">
 

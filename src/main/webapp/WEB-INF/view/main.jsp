@@ -19,6 +19,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6">
+            <br/>
             <div>
                 <form action="/login" method="get">
                     <button type="submit" class="btn btn-md btn-info">Դուրս գալ համակարգից</button>
@@ -50,7 +51,7 @@
                             <a href="/updateUserPage">Թարմացնել օգտատերի տվյալները</a>
                         </li>
                         <li>
-                            <a href="/searchHistoryPage">Ապրանքների պատմություն</a>
+                            <a href="/searchHistoryPage">Ապրանքների շարժի մատյան</a>
                         </li>
                     </ul>
                 </div>

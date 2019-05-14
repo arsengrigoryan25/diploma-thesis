@@ -20,7 +20,8 @@
         <div class="row">
             <div class="col-xs-offset-3 col-xs-6">
                 <div class="doc-list">
-                    <h2><a href="/">Գլխավոր էջ</a></h2>
+                    <h2>Վաճառել ապրանք</h2>
+                    <a href="/">Գլխավոր էջ</a>
                     <hr>
                     <div class="negrTable">
                         <div class="text-left form-group">

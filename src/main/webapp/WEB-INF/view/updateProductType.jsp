@@ -18,6 +18,7 @@
     <div class="row">
         <form:form action="${pageContext.request.contextPath}/updateProductType" method="post" modelAttribute="dictionaryContent">
             <div class="doc-list">
+                <h2>Թարմացնել ապրանքի տեսակ</h2>
                 <a href="/">Գլխավոր էջ</a>
                 <hr>
                 <div class="negrTable">

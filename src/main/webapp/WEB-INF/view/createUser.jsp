@@ -18,6 +18,7 @@
     <div class="row">
         <div class="col-xs-offset-3 col-xs-6">
             <div>
+                <h2>Ստեղծել օգտատեր</h2>
                 <a href="/">Գլխավոր էջ</a>
                 <hr>
             </div>

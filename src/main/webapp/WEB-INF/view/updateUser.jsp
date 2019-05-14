@@ -17,6 +17,7 @@
 <div class="container">
     <form:form action="${pageContext.request.contextPath}/updateUser" method="post" modelAttribute="userContent">
         <div class="doc-list">
+            <h2>Թարմացնել օգտատերի տվյալները</h2>
             <a href="/">Գլխավոր էջ</a>
             <hr/>
             <div class="negrTable">

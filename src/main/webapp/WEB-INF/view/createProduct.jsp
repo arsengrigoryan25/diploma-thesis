@@ -20,6 +20,7 @@
         <div class="col-xs-offset-3 col-xs-6">
             <form:form action="${pageContext.request.contextPath}/createProduct">
                 <div class="doc-list">
+                    <h2>Ստեղծել ապրանք</h2>
                     <a href="/">Գլխավոր էջ</a>
                     <hr>
                     <div class="negrTable">

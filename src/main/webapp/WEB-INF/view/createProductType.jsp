@@ -19,6 +19,7 @@
         <div class="col-xs-offset-2 col-xs-8">
             <form:form>
                 <div class="doc-list">
+                    <h2>Ավելացնել ապրանքի տեսակ</h2>
                     <a href="/">Գլխավոր էջ</a>
                     <hr>
                     <div class="negrTable">
