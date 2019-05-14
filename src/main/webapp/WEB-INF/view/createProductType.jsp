@@ -8,31 +8,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form:form>
-    <div class="doc-list">
-        <a href="/">Գլխավոր էջ</a>
-        <table class="negrTable">
-            <tbody>
-            <c:forEach items="${productType}" var="type">
-                <tr>
-                    <td>${type.id}</td>
-                    <td>${type.name}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-8">
+            <form:form>
+                <div class="doc-list">
+                    <a href="/">Գլխավոր էջ</a>
+                    <hr>
+                    <div class="negrTable">
+                        <ul class="list-unstyled">
+                            <c:forEach items="${productType}" var="type">
+                                <li>
+                                    <span>${type.id}</span>
+                                    <span>${type.name}</span>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+            </form:form>
+            <form:form action="${pageContext.request.contextPath}/createProductType">
+                <div class="doc-list form-group">
+                    <input id="typeName" type="text" name="name" class="mt-inp form-control">
+                </div>
+                <div class="form-group">
+                    <button id="addProductType" type="submit" class="btn save btn-primary mt-inp">Ավելացնել ապրանքի տիպ</button>
+                </div>
+            </form:form>
+            <label>${error}</label>
+        </div>
     </div>
-</form:form>
-<form:form action="${pageContext.request.contextPath}/createProductType">
-    <div class="doc-list">
-        <input id="typeName" type="text" name="name" class="btn save btn-primary mt-inp">
-    </div>
-    <div class="form-group">
-        <input id="addProductType" type="submit" value="ավելացնել ապրանքի տիպ" class="btn save btn-primary mt-inp">
-    </div>
-</form:form>
-<label>${error}</label>
+</div>
+
 </body>
 </html>

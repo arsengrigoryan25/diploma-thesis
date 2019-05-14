@@ -41,6 +41,7 @@
 <form:form action="${pageContext.request.contextPath}/searchHistory">
     <div class="doc-list">
         <a href="/">Գլխավոր էջ</a>
+        <hr>
         <div class="container">
             <div class="row">
                 <div class="col-xs-3">

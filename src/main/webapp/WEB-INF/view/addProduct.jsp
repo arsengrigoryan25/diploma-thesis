@@ -10,34 +10,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <form:form action="${pageContext.request.contextPath}/addProduct">
     <div class="doc-list">
         <table class="negrTable">
-            <tbody>
-            <tr>
-                <td><a href="/">Գլխավոր էջ</a></td>
-            </tr>
-            <tr>
-                <td>Քանակը</td>
-                <td><input id="countId" name="count" type="text" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Ապրանքը ավելացնել</td>
-                <td>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="addProductStatus" value="true" checked>
-                        <label class="custom-control-label" for="defaultGroupExample1">Պահեստ</label>
-                    </div>
-
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="addProductStatus" value="False">
-                        <label class="custom-control-label" for="defaultGroupExample2">Խանութ</label>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="/">Գլխավոր էջ</a>
+                    <hr>
+                </li>
+                <li>
+                    <td>Քանակը</td>
+                    <td>
+                        <input id="countId" name="count" type="text" class="form-control">
+                    </td>
+                </li>
+                <li>
+                    <td>Ապրանքը ավելացնել</td>
+                    <td>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="addProductStatus" value="true" checked>
+                            <label class="custom-control-label" for="defaultGroupExample1">Պահեստ</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="defaultGroupExample2" name="addProductStatus" value="False">
+                            <label class="custom-control-label" for="defaultGroupExample2">Խանութ</label>
+                        </div>
+                    </td>
+                </li>
+            </ul>
         </table>
         <div class="form-wrap-inner clearfix">
             <div class="form-group mt-4">
