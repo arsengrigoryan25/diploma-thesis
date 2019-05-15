@@ -8,6 +8,8 @@ import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.QuantityOfProductRepository;
 import com.warehouse.repository.ProductTypeRepository;
 import com.warehouse.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.util.*;
 
 @Controller
 public class ProductController {
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     private ProductRepository productRepository;
@@ -60,6 +63,7 @@ public class ProductController {
                 quantityOfProductRepository.save(productEntity);
                 infoRepository.save(new InfoEntity(new Date(), productCode, barcode, "Stextsvel e apranq," + name));
             } catch (Exception e) {
+                logger.error("Fail when save ProductEntity and QuantityOfProductEntity : ", e);
                 List<ProductTypeEntity> typeProducts = productTypeRepository.findAll();
                 modelAndView.addObject("productType", typeProducts);
                 modelAndView.addObject("productEntity", entity);
