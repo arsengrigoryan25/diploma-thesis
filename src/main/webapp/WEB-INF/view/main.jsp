@@ -10,42 +10,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
-    <form action="/login" method="get">
-        <input type="submit" value="Դուրս գալ համակարգից"/>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-offset-3 col-xs-6">
+            <br/>
+            <div>
+                <form action="/login" method="get">
+                    <button type="submit" class="btn btn-md btn-info">Դուրս գալ համակարգից</button>
+                </form>
+            </div>
+            <hr>
+            <div class="doc-list">
+                <div class="negrTable">
+                    <ul>
+                        <li>
+                            <a href="/sellProductPage">Վաճառել ապրանք</a>
+                        </li>
+                        <li>
+                            <a href="/createProductPage">Ստեղծել ապրանք</a>
+                        </li>
+                        <li>
+                            <a href="/searchOrAddProductPage">Փնտրել կամ ավելացնել ապրանք</a>
+                        </li>
+                        <li>
+                            <a href="/createProductTypePage">Ավելացնել ապրանքի տեսակ</a>
+                        </li>
+                        <li>
+                            <a href="/updateProductTypePage">Թարմացնել ապրանքի տեսակ</a>
+                        </li>
+                        <li>
+                            <a href="/createUserPage">Ստեղծել օգտատեր</a>
+                        </li>
+                        <li>
+                            <a href="/updateUserPage">Թարմացնել օգտատերի տվյալները</a>
+                        </li>
+                        <li>
+                            <a href="/searchHistoryPage">Ապրանքների շարժի մատյան</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
-<div class="doc-list">
-    <table class="negrTable">
-        <tbody>
-        <tr>
-            <td><a href="/sellProductPage">Վաճառել ապրանք</a></td>
-        </tr>
-        <tr>
-            <td><a href="/createProductPage">Ստեղծել ապրանք</a></td>
-        </tr>
-        <tr>
-            <td><a href="/searchOrAddProductPage">Փնտրել կամ ավելացնել ապրանք</a></td>
-        </tr>
-        <tr>
-            <td><a href="/createProductTypePage">Ավելացնել ապրանքի տեսակ</a></td>
-        </tr>
-        <tr>
-            <td><a href="/updateProductTypePage">Թարմացնել ապրանքի տեսակ</a></td>
-        </tr>
-        <tr>
-            <td><a href="/createUserPage">Ստեղծել օգտատեր</a></td>
-        </tr>
-        <tr>
-            <td><a href="/updateUserPage">Թարմացնել օգտատերի տվյալները</a></td>
-        </tr>
-        <tr>
-            <td><a href="/searchHistoryPage">Ապրանքների պատմություն</a></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+
 </body>
 </html>

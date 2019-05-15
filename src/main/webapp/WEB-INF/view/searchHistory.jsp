@@ -37,10 +37,12 @@
 
 </head>
 <body>
-
+<div class="container">
 <form:form action="${pageContext.request.contextPath}/searchHistory">
     <div class="doc-list">
+        <h2>Ապրանքների շարժի մատյան</h2>
         <a href="/">Գլխավոր էջ</a>
+        <hr>
         <div class="container">
             <div class="row">
                 <div class="col-xs-3">
@@ -142,6 +144,7 @@
         </div>
     </div>
 </form:form>
+</div>
 <script type="text/javascript">
     // $(function () {
     //     $('#datetimepicker1').datetimepicker();

@@ -11,49 +11,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <form:form action="${pageContext.request.contextPath}/searchProduct">
-    <div class="doc-list">
-        <a href="/">Գլխավոր էջ</a>
-        <table class="negrTable">
-            <tbody>
-            <tr>
-                <td><label>Ապրանքի անուն</label></td>
-                <td><input id="nameId" name="name" type="text" class="form-control" value="${filterValue.name}"/></td>
-            </tr>
-            <tr>
-                <td><label>Տեսակ</label></td>
-                <td>
-                    <select id="productTypeId" name="productType" class="form-control">
-                        <c:forEach items="${productType}" var="type">
-                            <option value="${type.id}"
-                            <c:if test="${filterValue.productTypeId eq type.id}"> selected="selected" </c:if>>
-                                ${type.name}
-                            </option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><label>Ապրանքի կոդը</label></td>
-                <td><input id="productCodeId" name="productCode" type="text" class="form-control" value="${filterValue.productCode}"/></td>
-            </tr>
-            <tr>
-                <td><label>Շտրիխ կոդ</label></td>
-                <td><input id="barcodeId" name="barcode" type="text" class="form-control" value="${filterValue.barcode}"/></td>
-            </tr>
-            </tbody>
-            <label>${error}</label>
-        </table>
-        <div class="form-wrap-inner clearfix">
-            <div class="form-group mt-4">
-                <input type="submit" value="Փնտրել" class="btn btn-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6">
+                <div class="doc-list">
+                    <h2>Փնտրել կամ ավելացնել ապրանք</h2>
+                    <a href="/">Գլխավոր էջ</a>
+                    <hr>
+                    <div class="negrTable">
+                        <ul class="list-unstyled text-left">
+                            <li>
+                                <label>Ապրանքի անուն</label>
+                                <input id="nameId" name="name" type="text" class="form-control" value="${filterValue.name}"/>
+                            </li>
+                            <li>
+                                <label>Տեսակ</label>
+                                <select id="productTypeId" name="productType" class="form-control">
+                                    <c:forEach items="${productType}" var="type">
+                                        <option value="${type.id}"
+                                        <c:if test="${filterValue.productTypeId eq type.id}"> selected="selected" </c:if>>
+                                            ${type.name}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </li>
+                            <li>
+                                <label>Ապրանքի կոդը</label>
+                                <input id="productCodeId" name="productCode" type="text" class="form-control" value="${filterValue.productCode}"/>
+                            </li>
+                            <li>
+                                <label>Շտրիխ կոդ</label>
+                                <input id="barcodeId" name="barcode" type="text" class="form-control" value="${filterValue.barcode}"/>
+                            </li>
+                        </ul>
+                        <label>${error}</label>
+                    </div>
+                </div>
+                <div class="form-wrap-inner pull-right">
+                    <div class="form-group mt-4">
+                        <input type="submit" value="Փնտրել" class="btn btn-primary">
+                    </div>
+                </div>
             </div>
         </div>
-
+    </div>
+    <div class="container-fluid">
         <div class="doc-list">
             <table class="negrTable table borderless">
                 <thead>
@@ -102,6 +110,7 @@
             </table>
         </div>
     </div>
+
 </form:form>
 <form:form action="${pageContext.request.contextPath}/addProduct">
     <div id="myModal" class="modal fade" role="dialog">
@@ -109,7 +118,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h2>Ավելացնել ապրանք</h2>
                 </div>
                 <div class="modal-body">
 
