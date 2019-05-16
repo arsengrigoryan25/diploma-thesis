@@ -8,6 +8,7 @@ import com.warehouse.repository.ProductRepository;
 import com.warehouse.repository.QuantityOfProductRepository;
 import com.warehouse.repository.ProductTypeRepository;
 import com.warehouse.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+@Slf4j
 @Controller
 public class ProductController {
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
@@ -64,6 +66,7 @@ public class ProductController {
                 infoRepository.save(new InfoEntity(new Date(), productCode, barcode, "Stextsvel e apranq," + name));
             } catch (Exception e) {
                 logger.error("Fail when save ProductEntity and QuantityOfProductEntity : ", e);
+                log.error(" Fail when call method getReportCompact : ", e);  // using @Slf4j  annotation-@
                 List<ProductTypeEntity> typeProducts = productTypeRepository.findAll();
                 modelAndView.addObject("productType", typeProducts);
                 modelAndView.addObject("productEntity", entity);
