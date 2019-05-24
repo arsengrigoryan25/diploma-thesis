@@ -36,7 +36,8 @@ public class ProductController {
 
     private static final String DIGITAL_PATTERN = "^\\d{0,13}$";
 
-    @RequestMapping("/createProductPage")
+
+    @GetMapping("/createProductPage")//    @RequestMapping("/createProductPage")
     public ModelAndView getPageCreateProduct() {
         List<ProductTypeEntity> typeProducts = productTypeRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("createProduct");
